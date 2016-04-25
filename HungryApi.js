@@ -34,31 +34,38 @@
     mysqlUtilities.upgrade(connection);
     mysqlUtilities.introspection(connection);
 
-    app.listen(8000, function(){
+    app.listen(8000, function () {
         console.log('Express server is listening on port 8000');
     });
 }
 
-app.get('/users', function(req, res) {
-    console.log('/users');
-    connection.query('select * from users', function(err, result) {
-        res.json({status: result})
+app.get('/db/get', parser, function (req, res) {
+    tablename = req.query.table;
+    connection.query('select * from ' + tablename, function (err, result) {
+        if (err) {
+            console.log('- > TABLE ' + tablename + ' does not exist' + '\n' + err);
+            res.send('null');
+        } else {
+            console.log('- > TABLE ' + tablename + '\n');
+            res.json(result)
+        }
+
     })
 });
 
-app.put('/api/sendMail', parser,  function (req, res) {
+app.put('/api/sendMail', parser, function (req, res) {
     console.log("sendMail start");
 
     var mail = req.body.mail;
 
-    connection.query("Select * from users where email='" + mail + "'", function(err, result) {
+    connection.query("Select * from users where email='" + mail + "'", function (err, result) {
 
         if (result.length == 0) {
             request = "insert into users (code, email) values (?, ?)"
         }
         else {
             if (result[0]["code"] == "0") {
-                error = { error: "Такой  e-mail уже зарегистрирован!" };
+                error = {error: "Такой  e-mail уже зарегистрирован!"};
                 console.log(error);
                 res.json(error);
                 return;
@@ -90,7 +97,7 @@ app.put('/api/sendMail', parser,  function (req, res) {
             text: 'Ваш код подтверждения: ' + code
         };
 
-        transporter.sendMail(message, function(errorTransporter, info){
+        transporter.sendMail(message, function (errorTransporter, info) {
             error = {error: "Код подтверждения не был отправлен, попробуйте позже."};
             if (errorTransporter) {
                 console.log("Error transporter");
@@ -101,7 +108,7 @@ app.put('/api/sendMail', parser,  function (req, res) {
 
             connection.query(request,
                 [code, mail],
-                function(errorDB, result) {
+                function (errorDB, result) {
                     console.log(result);
                     if (!errorDB) {
                         res.json({status: "OK", text: "Код был отправлен на адрес " + mail + "."});
@@ -114,7 +121,7 @@ app.put('/api/sendMail', parser,  function (req, res) {
     });
 });
 
-app.get('/api/checkCode', parser, function(req, res) {
+app.get('/api/checkCode', parser, function (req, res) {
     console.log(req.url);
     mail = req.query.mail;
     code = req.query.code;
@@ -123,14 +130,14 @@ app.get('/api/checkCode', parser, function(req, res) {
 
     request = "select * from users where email='" + mail + "' and code=" + code;
     console.log(request);
-    connection.query(request, function(err, result) {
+    connection.query(request, function (err, result) {
         if (err) {
             console.log("Database error: " + err);
             res.json({error: "Ошибка проверки кода"});
         }
 
         if (result.length == 0) {
-            er = { error: "Неправильный код!" };
+            er = {error: "Неправильный код!"};
             console.log(er);
             console.log(result);
             res.json(er);
@@ -142,7 +149,7 @@ app.get('/api/checkCode', parser, function(req, res) {
     });
 });
 
-app.put('/api/registration', parser, function(req, res) {
+app.put('/api/registration', parser, function (req, res) {
     email = req.body.mail;
     surname = req.body.surname;
     name = req.body.name;
@@ -159,7 +166,7 @@ app.put('/api/registration', parser, function(req, res) {
     // хэширование пароля с солью из email
     pass = crypto.createHash("sha1").update(pass).digest("hex");
     salt = crypto.createHash("md5").update(email).digest("hex");
-    pass = crypto.createHash("sha1").update(pass+salt).digest("hex");
+    pass = crypto.createHash("sha1").update(pass + salt).digest("hex");
 
     // todo: загружать фото и сохранять url
 
@@ -167,25 +174,36 @@ app.put('/api/registration', parser, function(req, res) {
         "phone=?, vk=?, dorm_id=?, flat=?, fac_id=?, pass=?, code=0 where email=? AND pass IS NULL";
     params = [surname, name, gender, phone, vk, dorm_id, flat, fac_id, pass, email];
 
-    connection.query(request, params, function(err, result) {
-
+    connection.query(request, params, function (err, result) {
         // todo: ошибка такой email уже существует
         if (err || result.affectedRows == 0) {
-            errorText = "Ошибка при регистрации нового пользователя";
-            console.log(result);
-            console.log(request);
-            console.log(errorText + "\n" + err);
-            res.json({error: errorText});
+            res.json({status: "error"})
         }
         else {
-            var message = "Новый пользователь зарегестрирован";
-            console.log(message);
-            res.json({status: "success", text: message});
+            connection.query('select user_id from users where email = ? and pass = ?', [email, pass], function (err, result) {
+                console.log(result);
+                var expires = moment().add(14, 'days').unix(); // время смерти токена
+                var token = jwt.encode({
+                    iss: result[0]['user_id'],
+                    exp: expires
+                }, secret);
+
+                response = {
+                    status: "success",
+                    token: {
+                        token: token,
+                        expires: expires,
+                        id: result[0]['user_id']
+                    }
+                };
+                res.json(response);
+            })
         }
     })
 });
 
-app.get('/api/login', parser, function(req, res) {
+// todo: refreshtoken, ограничение на ip,
+app.get('/api/login', parser, function (req, res) {
 //  response = {status : "null", message : "null", token : "null"};
     email = req.query.mail;
     pass = req.query.password;
@@ -195,9 +213,9 @@ app.get('/api/login', parser, function(req, res) {
     // хэширование пароля с солью из email
     pass = crypto.createHash("sha1").update(pass).digest("hex");
     salt = crypto.createHash("md5").update(email).digest("hex");
-    pass = crypto.createHash("sha1").update(pass+salt).digest("hex");
+    pass = crypto.createHash("sha1").update(pass + salt).digest("hex");
 
-    connection.query('select email from users where email = ?', [email], function(err, result){
+    connection.query('select email from users where email = ?', [email], function (err, result) {
         console.log(result);
         if (!err) {
             if (result.length != 0) {
@@ -219,11 +237,10 @@ app.get('/api/login', parser, function(req, res) {
 
                             response = {
                                 status: "success",
-                                token :
-                                {
-                                    token : token,
-                                    expires : expires,
-                                    id : result[0]['user_id']
+                                token: {
+                                    token: token,
+                                    expires: expires,
+                                    id: result[0]['user_id']
                                 }
                             };
 
@@ -239,13 +256,13 @@ app.get('/api/login', parser, function(req, res) {
                 res.json(response);
             }
         } else {
-            response = {status : "error", message : "Ошибка на сервере. Попробуйте позже."}
+            response = {status: "error", message: "Ошибка на сервере. Попробуйте позже."}
             res.json(response);
         }
     });
 });
 
-app.post('/api/makeInvite', parser, function(req,res){
+app.post('/api/makeInvite', parser, function (req, res) {
     console.log('/api/MakeInvite');
 // response = {status : "null", message : "null"}    
 
@@ -253,22 +270,29 @@ app.post('/api/makeInvite', parser, function(req,res){
     dish = req.body.dish;
     dishabout = req.body.dishabout;
     meettime = req.body.meettime;
-    
-    if (token.exp<=moment().unix()) {
-        res.json({status : "tokendied"});
+
+    exp = token.exp;
+    now = moment().unix();
+
+    tokenvalid = ((exp - now > 0) || (exp - now <= days * 24 * 60 * 60));
+
+    if (!tokenvalid) {
+        res.json({status: "tokendied"});
     } else {
         connection.query('insert into invitations (owner_id, dish, dish_about, meet_time) values (?,?,?,?)',
             [token.iss, dish, dishabout, meettime], function (err, result) {
                 if (!err) {
-                    connection.query('update users set status = "owner" where id = ?', [token.iss], function (err, result) {
-                        if (err) {
+                    console.log(token.iss);
+                    connection.query('update users set status = ? where user_id = ?', ["owner", token.iss], function (err, result) {
+                        if (!err) {
                             res.json({status: "success"});
                         } else {
+                            console.log('/api/makeinvite/ update error ' + err);
                             res.json({status: "error", message: "Ошибка на сервере. Попробуйте позже"});
-                        }
-                        ;
+                        };
                     });
                 } else {
+                    console.log('/api/makeinvite/ insert error ' + err);
                     res.json({status: "error", message: "Ошибка на сервере. Попробуйте позже"});
                 }
             });
