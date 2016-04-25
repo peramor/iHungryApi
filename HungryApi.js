@@ -145,14 +145,20 @@ app.put('/api/registration', parser, function(req, res) {
     dorm_id = req.body.dorm_id;
     flat = req.body.flat;
     fac_id = req.body.fac_id;
-    pass = crypto.createHash('md5').update(req.body.pass).digest("hex");
+    pass = req.body.pass;
+
+    console.log('-> user : "' + email + '" try to sign in');
+
+    // хэширование пароля с солью из email
+    pass = crypto.createHash("sha1").update(pass).digest("hex");
+    salt = crypto.createHash("md5").update(email).digest("hex");
+    pass = crypto.createHash("sha1").update(pass+salt).digest("hex");
 
     // todo: загружать фото и сохранять url
 
     request = "update users set surname=?, name=?, gender=?," +
-        "phone=?, vk=?, dorm_id=?, flat=?, fac_id=?, pass=?, code=0 where email=? AND pass IS NULL";
-    params = [surname, name, gender, phone,
-        vk, dorm_id, flat, fac_id, pass, email];
+        "phone=?, vk=?, dorm_id=?, flat=?, fac_id=?, pass=?, code=0 where email=?"; // todo: AND pass IS NULL
+    params = [surname, name, gender, phone, vk, dorm_id, flat, fac_id, pass, email];
 
     connection.query(request, params, function(err, result) {
 
@@ -173,34 +179,53 @@ app.put('/api/registration', parser, function(req, res) {
 });
 
 app.get('/api/login', parser, function(req, res) {
-    mail = req.query.mail;
-    password = req.query.password;
+//  response = {status : "null", message : "null", id : "null"};
+    email = req.headers.mail;
+    pass = req.headers.password;
 
-    connection.query("select * from users where email=? AND pass=?", [mail, password], function(err, result) {
-        if (err) {
-            error = { error: "Ошибка входа" };
-            console.log(err);
-            res.json(error)
-        }
-        else {
-            if (result.length > 0) {
-                console.log(mail + " login");
+    console.log('-> user : "' + email + '" tries to login');
 
-                res.json({ status: "success", id: result[0]["user_id"] });
+    // хэширование пароля с солью из email
+    pass = crypto.createHash("sha1").update(pass).digest("hex");
+    salt = crypto.createHash("md5").update(email).digest("hex");
+    pass = crypto.createHash("sha1").update(pass+salt).digest("hex");
+
+    connection.query('select email from users where email = ?', [email], function(err, result){
+        console.log(result);
+        if (!err) {
+            if (result.length != 0) {
+                truemail = result[0]['email'];
+                console.log(truemail);
+                connection.query('select user_id from users where email = ? and pass = ?', [truemail, pass], function (err, result) {
+                    console.log(result);
+                    if (!err) {
+                        if (result.length == 0) {
+                            response = {status: "error", message: "Неверный пароль"};
+                            res.json(response);
+                        } else {
+                            response = {status: "success", id: result[0]['user_id']};
+                            res.json(response);
+                        }
+                    } else {
+                        response = {status: "error", message: "Ошибка на сервере. Попробуйте позже."}
+                        res.json(response);
+                    }
+                })
+            } else {
+                response = {status: "error", message: "Email не зарегистрирован"};
+                res.json(response);
             }
-            else {
-                // todo: различать когда неверный логин, а когда пароль ??
-                error = { error: "Неверный логин или пароль!" };
-                console.log(error);
-                res.json(error);
-            }
+        } else {
+            response = {status : "error", message : "Ошибка на сервере. Попробуйте позже."}
+            res.json(response);
         }
-    })
+    });
 });
 
 app.post('/api/makeInvite', parser, function(req,res){
     console.log('/api/MakeInvite')
 
+    // todo: приниматть токен вместо логина и пароля
     mail = req.body.mail;
     password = req.body.password;
     dish = req.body.dish;
