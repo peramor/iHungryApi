@@ -1,36 +1,43 @@
-var express         = require('express');
-var path            = require('path'); // модуль для парсинга пути
-var bodyParser = require('body-parser');
-var app = express();
-var parser = bodyParser.urlencoded({
-    extended: true
-});
-var mysql      = require('mysql'),
-    mysqlUtilities = require('mysql-utilities');
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user : 'root',
-    database: "hungry",
-    charset: "utf8"
-});
-var crypto = require('crypto');
+{
+    var express = require('express');
+    var path = require('path'); // модуль для парсинга пути
+    var bodyParser = require('body-parser');
+    var app = express();
+    var parser = bodyParser.urlencoded({
+        extended: true
+    });
 
-app.use(parser);
-app.use(bodyParser.json());
+    var jwt = require('jwt-simple'); // модуль для токенов
+    var secret = '1s72$медведь?_13ASDF';
+    var moment = require('moment'); // работает с датами
 
-connection.connect(function(err){
-    if(!err) {
-        console.log("Database is connected");
-    } else {
-        console.log(err);
-    }
-});
-mysqlUtilities.upgrade(connection);
-mysqlUtilities.introspection(connection);
+    var mysql = require('mysql'),
+        mysqlUtilities = require('mysql-utilities');
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        database: "hungry",
+        charset: "utf8"
+    });
+    var crypto = require('crypto');
 
-app.listen(8000, function(){
-    console.log('Express server is listening on port 8000');
-});
+    app.use(parser);
+    app.use(bodyParser.json());
+
+    connection.connect(function (err) {
+        if (!err) {
+            console.log("Database is connected");
+        } else {
+            console.log(err);
+        }
+    });
+    mysqlUtilities.upgrade(connection);
+    mysqlUtilities.introspection(connection);
+
+    app.listen(8000, function(){
+        console.log('Express server is listening on port 8000');
+    });
+}
 
 app.get('/users', function(req, res) {
     console.log('/users');
@@ -157,7 +164,7 @@ app.put('/api/registration', parser, function(req, res) {
     // todo: загружать фото и сохранять url
 
     request = "update users set surname=?, name=?, gender=?," +
-        "phone=?, vk=?, dorm_id=?, flat=?, fac_id=?, pass=?, code=0 where email=?"; // todo: AND pass IS NULL
+        "phone=?, vk=?, dorm_id=?, flat=?, fac_id=?, pass=?, code=0 where email=? AND pass IS NULL";
     params = [surname, name, gender, phone, vk, dorm_id, flat, fac_id, pass, email];
 
     connection.query(request, params, function(err, result) {
@@ -179,9 +186,9 @@ app.put('/api/registration', parser, function(req, res) {
 });
 
 app.get('/api/login', parser, function(req, res) {
-//  response = {status : "null", message : "null", id : "null"};
-    email = req.headers.mail;
-    pass = req.headers.password;
+//  response = {status : "null", message : "null", token : "null"};
+    email = req.query.mail;
+    pass = req.query.password;
 
     console.log('-> user : "' + email + '" tries to login');
 
@@ -203,7 +210,23 @@ app.get('/api/login', parser, function(req, res) {
                             response = {status: "error", message: "Неверный пароль"};
                             res.json(response);
                         } else {
-                            response = {status: "success", id: result[0]['user_id']};
+
+                            var expires = moment().add(14, 'days').unix(); // время смерти токена
+                            var token = jwt.encode({
+                                iss: result[0]['user_id'],
+                                exp: expires
+                            }, secret);
+
+                            response = {
+                                status: "success",
+                                token :
+                                {
+                                    token : token,
+                                    expires : expires,
+                                    id : result[0]['user_id']
+                                }
+                            };
+
                             res.json(response);
                         }
                     } else {
@@ -223,35 +246,32 @@ app.get('/api/login', parser, function(req, res) {
 });
 
 app.post('/api/makeInvite', parser, function(req,res){
-    console.log('/api/MakeInvite')
+    console.log('/api/MakeInvite');
+// response = {status : "null", message : "null"}    
 
-    // todo: приниматть токен вместо логина и пароля
-    mail = req.body.mail;
-    password = req.body.password;
+    token = jwt.decode(req.body.token, secret);
     dish = req.body.dish;
     dishabout = req.body.dishabout;
     meettime = req.body.meettime;
-    console.log(mail + ' ' + password + ' ' + dish + ' ' + dishabout + ' ' + meettime);
-
-    query1 = 'select user_id from users where email=? and pass=?';
-    connection.queryValue(query1, [mail, password], function(err, ownerid){
-        query2 = 'insert into invitations (owner_id, dish, dish_about, meet_time) values (?,?,?,?)';
-        connection.query(query2, [ownerid, dish, dishabout, meettime], function(err, result){
-            if (!err) {
-                console.log('Создано приглашение');
-                res.json({status: "success"});
-            } else {
-                res.json({error: "error"});
-            }
-        })
-        query3 = 'update users set status = ? where user_id = ?';
-        connection.query(query3, ['owner', ownerid], function(err){
-            if (err) {
-                console.log('Не получилось изменить статус пользователя на owner '+err);
-            }
-            else {
-                console.log('Статус пользователя %s изменен на "OWNER"', ownerid);
-            }
-        });
-    });
+    
+    if (token.exp<=moment().unix()) {
+        res.json({status : "tokendied"});
+    } else {
+        connection.query('insert into invitations (owner_id, dish, dish_about, meet_time) values (?,?,?,?)',
+            [token.iss, dish, dishabout, meettime], function (err, result) {
+                if (!err) {
+                    connection.query('update users set status = "owner" where id = ?', [token.iss], function (err, result) {
+                        if (err) {
+                            res.json({status: "success"});
+                        } else {
+                            res.json({status: "error", message: "Ошибка на сервере. Попробуйте позже"});
+                        }
+                        ;
+                    });
+                } else {
+                    res.json({status: "error", message: "Ошибка на сервере. Попробуйте позже"});
+                }
+            });
+    }
 });
+
