@@ -7,9 +7,7 @@
         extended: true
     });
 
-    var jwt = require('jwt-simple'); // модуль для токенов
-    var secret = '1s72$медведь?_13ASDF';
-    var moment = require('moment'); // работает с датами
+    var jwt = require('./jwtauth.js');
 
     var mysql = require('mysql'),
         mysqlUtilities = require('mysql-utilities');
@@ -179,24 +177,12 @@ app.put('/api/registration', parser, function (req, res) {
         if (err || result.affectedRows == 0) {
             res.json({status: "error"})
         }
+            
+            // todo: упростить, вынести работу над токеном в отдельный модуль
         else {
             connection.query('select user_id from users where email = ? and pass = ?', [email, pass], function (err, result) {
                 console.log(result);
-                var expires = moment().add(14, 'days').unix(); // время смерти токена
-                var token = jwt.encode({
-                    iss: result[0]['user_id'],
-                    exp: expires
-                }, secret);
-
-                response = {
-                    status: "success",
-                    token: {
-                        token: token,
-                        expires: expires,
-                        id: result[0]['user_id']
-                    }
-                };
-                res.json(response);
+                res.json({status : "success", token : jwt.gettoken(result[0]['user_id'])});
             })
         }
     })
@@ -225,59 +211,35 @@ app.get('/api/login', parser, function (req, res) {
                     console.log(result);
                     if (!err) {
                         if (result.length == 0) {
-                            response = {status: "error", message: "Неверный пароль"};
-                            res.json(response);
+                            res.json({status: "error", message: "Неверный пароль"});
                         } else {
-
-                            var expires = moment().add(14, 'days').unix(); // время смерти токена
-                            var token = jwt.encode({
-                                iss: result[0]['user_id'],
-                                exp: expires
-                            }, secret);
-
-                            response = {
-                                status: "success",
-                                token: {
-                                    token: token,
-                                    expires: expires,
-                                    id: result[0]['user_id']
-                                }
-                            };
-
-                            res.json(response);
+                            res.json({status : "success", token : jwt.gettoken(result[0]['user_id'])});
                         }
                     } else {
-                        response = {status: "error", message: "Ошибка на сервере. Попробуйте позже."}
-                        res.json(response);
+                        res.json({status: "error", message: "Ошибка на сервере. Попробуйте позже."});
                     }
                 })
             } else {
-                response = {status: "error", message: "Email не зарегистрирован"};
-                res.json(response);
+                res.json({status: "error", message: "Email не зарегистрирован"});
             }
         } else {
-            response = {status: "error", message: "Ошибка на сервере. Попробуйте позже."}
-            res.json(response);
+            res.json({status: "error", message: "Ошибка на сервере. Попробуйте позже."});
         }
     });
 });
 
+// todo : отправлять список голодных
 app.post('/api/makeInvite', parser, function (req, res) {
+// response = {status : "null", message : "null"}      
     console.log('/api/MakeInvite');
-// response = {status : "null", message : "null"}    
 
-    token = jwt.decode(req.body.token, secret);
+    token = req.body.token;
     dish = req.body.dish;
     dishabout = req.body.dishabout;
     meettime = req.body.meettime;
 
-    exp = token.exp;
-    now = moment().unix();
-
-    tokenvalid = ((exp - now > 0) || (exp - now <= days * 24 * 60 * 60));
-
-    if (!tokenvalid) {
-        res.json({status: "tokendied"});
+    if (!jwt.tokenvalid(token)) {
+        res.json({status: "invalid token"});
     } else {
         connection.query('insert into invitations (owner_id, dish, dish_about, meet_time) values (?,?,?,?)',
             [token.iss, dish, dishabout, meettime], function (err, result) {
@@ -298,4 +260,10 @@ app.post('/api/makeInvite', parser, function (req, res) {
             });
     }
 });
+
+/*
+app.post('/api/ihungry', parser, function(req, res){
+  token = req.body.token;
+})
+*/
 
