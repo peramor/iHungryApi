@@ -1,28 +1,59 @@
-/api/login/ (GET)
-==========
+/api/registration (PUT)
+=======================
+Parameters:
+----------
+* mail
+* surname
+* name
+* gender
+* phone
+* vk
+* dorm_id
+* flat
+* fac_id
+* pass
 
-Parameters: mail, password
---------------------------
 Response:
 ---------
-*    if mail & password are correct
-        status : "Success",
-        token : {
-            token : value1, // xxx.yyy.zzz token
-            expires : value2, // время, до которого токен валидный, в формате unix
-            id : value3 }  // id пользователя
+status, text, accessToken, refreshToken
 
-*    if mail is correct, passwors is incorrect
-        status : "Error"
-        message : "Неверный пароль"
+**all data is correct**
+- status : "success"
+- accessToken : xxx.yyy.zzz
+- refreshToken : abc
 
-*    if mail is incorrect
-        status : "Error"
-        message : "Email не зарегистрирован"
+**Else**
+- status : "error"
+- text : "Ошибка на сервере, попробуйте позже"
 
-*    Else
-        status : "Error"
-        message : "Ошибка на сервере. Попробуйте позже."
+/api/login (GET)
+==========
+
+Parameters:
+-----------
+* mail,
+* password
+
+Response:
+---------
+status, text, refreshToken, accessToken
+
+**if mail & password are correct**
+- status : "Success",
+- accessToken : xxx.yyy.zzz,
+- refreshToken: abc
+
+**if mail is correct, password is incorrect**
+- status : "Error"
+- text : "Неверный пароль"
+
+**if mail is incorrect**
+- status : "Error"
+- text : "Email не зарегистрирован"
+
+**Else**
+- status : "Error"
+- text : "Ошибка на сервере. Попробуйте позже."
 
 /api/makeInvite/ (POST)
 ================
@@ -31,17 +62,17 @@ Parameters:
 -----------
 * token
 * dish
-* dishabout
-* meettime (unix)
+* dishAbout
+* meetTime (unix)
 
 Response:
 --------
-*    if token is invalid
-        status : "tokendied"
+**if token is invalid**
+- status : "tokendied"
 
-*    if internal errors exist in api
-        status : "error"
-        message : "Ошибка на сервере. Попробуйте позже"
+**if internal errors exist in api**
+- status : "error"
+- message : "Ошибка на сервере. Попробуйте позже"
 
-*    Else
-        status : "success"
+**Else**
+- status : "success"

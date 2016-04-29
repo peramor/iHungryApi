@@ -1,33 +1,50 @@
 var jwt = require('jwt-simple');
+var randtoken = require('rand-token');
 var moment = require('moment');
 var days = 14;
 var secret = '1s72$медведь?_13ASDF';
+var sf = 'jwtauth.js' + '    | '; // stringFormat
 
-
-function Tokenvalid(encodedtoken){
-    var tokenvalid = false;
+function TokenValid(encodedToken){
+    console.log('|    Проверка маркера доступа : ' + encodedToken)
+    var tokenValid = false;
     try {
-        token = jwt.decode(encodedtoken, secret);
+        token = jwt.decode(encodedToken, secret);
         exp = token.exp;
         now = moment().unix();
+        console.log(sf + 'exp = %d\n|    now = %d', exp, now);
 
-        tokenvalid = ((exp - now > 0) && (exp - now <= days * 24 * 60 * 60));
+        tokenValid = ((exp - now > 0) && (exp - now <= days * 24 * 60 * 60));
+        console.log(sf + 'проверка пройдена : ' + tokenValid);
     } catch(err){
-        console.log(err);
-        tokenvalid = false;
+        console.log(sf + 'ERROR не удалось декодировать маркер доступа : ' + err);
+        tokenValid = false;
     }
-    return tokenvalid;
+    return tokenValid;
 }
 
-function Gettoken(iss)
-{
-     var expires = moment().add(days, 'days').unix(); // время смерти токена
-     var token = jwt.encode({
+function GetToken(iss, exptime, timetype) {
+    console.log(sf + 'GetToken started..');
+    var expires = moment().add(exptime, timetype).unix(); // время смерти токена
+    console.log(sf + 'Access Token Expires : ' + expires);
+    var token = jwt.encode({
         iss: iss,
         exp: expires
-     }, secret);
-     return token;
+    }, secret);
+    console.log(sf + 'Access Token : ' + token);
+    return token;
 }
 
-module.exports.gettoken = Gettoken;
-module.exports.tokenvalid = Tokenvalid;
+function GetRefreshToken(iss, exptime, timetype){
+    console.log(sf + "GetRefreshToken started..");
+    var token = randtoken.generate(32);
+    var expires = moment().add(exptime, timetype).unix();
+    console.log(sf + "Refresh Token : " + token);
+    console.log(sf + "Refresh Token Expires : " + expires);
+    var refreshToken = [iss, token, expires];
+    return refreshToken;
+}
+
+module.exports.GetToken = GetToken;
+module.exports.TokenValid = TokenValid;
+module.exports.GetRefreshToken = GetRefreshToken;
