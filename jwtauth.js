@@ -6,13 +6,13 @@ var secret = '1s72$медведь?_13ASDF';
 var sf = 'jwtauth.js' + '    | '; // stringFormat
 
 function TokenValid(encodedToken){
-    console.log('|    Проверка маркера доступа : ' + encodedToken)
+    console.log(sf + 'Проверка маркера доступа : ' + encodedToken)
     var tokenValid = false;
     try {
         token = jwt.decode(encodedToken, secret);
         exp = token.exp;
         now = moment().unix();
-        console.log(sf + 'exp = %d\n|    now = %d', exp, now);
+        console.log(sf + 'exp = %d\n' + sf + 'now = %d', exp, now);
 
         tokenValid = ((exp - now > 0) && (exp - now <= days * 24 * 60 * 60));
         console.log(sf + 'проверка пройдена : ' + tokenValid);
@@ -21,6 +21,10 @@ function TokenValid(encodedToken){
         tokenValid = false;
     }
     return tokenValid;
+}
+
+function Decode(encodedToken){
+    return jwt.decode(encodedToken, secret);
 }
 
 function GetToken(iss, exptime, timetype) {
@@ -48,3 +52,4 @@ function GetRefreshToken(iss, exptime, timetype){
 module.exports.GetToken = GetToken;
 module.exports.TokenValid = TokenValid;
 module.exports.GetRefreshToken = GetRefreshToken;
+module.exports.Decode = Decode;

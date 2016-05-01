@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dd84101-8cee-445b-b240-b18f075e532d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitignore" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hungry (new).sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HungryApi.js" afterPath="$PROJECT_DIR$/HungryApi.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ReadMe.md" afterPath="$PROJECT_DIR$/ReadMe.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jwtauth.js" afterPath="$PROJECT_DIR$/jwtauth.js" />
@@ -26,21 +27,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HungryApi.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReadMe.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ReadMe.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SECOND">
+              <first_editor relative-caret-position="136">
+                <caret line="8" column="50" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HungryApi.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/HungryApi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="189" column="42" selection-start-line="189" selection-start-column="42" selection-end-line="189" selection-end-column="42" />
+            <state relative-caret-position="425">
+              <caret line="305" column="17" selection-start-line="305" selection-start-column="17" selection-end-line="305" selection-end-column="17" />
               <folding>
                 <element signature="e#0#1070#0" expanded="false" />
                 <element signature="e#737#871#0" expanded="false" />
                 <element signature="e#994#1066#0" expanded="false" />
                 <element signature="e#1119#1571#0" expanded="false" />
-                <element signature="e#1628#4111#0" expanded="false" />
-                <element signature="e#4169#5055#0" expanded="false" />
-                <element signature="e#7712#10183#0" expanded="false" />
-                <element signature="e#10280#11972#0" expanded="false" />
-                <element signature="e#12032#12092#0" expanded="false" />
+                <element signature="e#1628#4067#0" expanded="false" />
+                <element signature="e#4125#5008#0" expanded="false" />
+                <element signature="e#5074#8305#0" expanded="false" />
+                <element signature="e#8364#11469#0" expanded="false" />
+                <element signature="e#13358#14634#0" expanded="false" />
+                <marker date="1462115486730" expanded="true" signature="12111:13291" placeholder="{...}" />
+                <marker date="1462115486730" expanded="true" signature="12339:13283" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -49,8 +65,8 @@
       <file leaf-file-name="Hash.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Hash.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+            <state relative-caret-position="136">
+              <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -59,8 +75,8 @@
       <file leaf-file-name="jwtauth.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jwtauth.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="49" />
+            <state relative-caret-position="51">
+              <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -72,19 +88,6 @@
             <state relative-caret-position="204">
               <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReadMe.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ReadMe.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="1" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
-                <folding />
-              </first_editor>
-              <second_editor />
             </state>
           </provider>
         </entry>
@@ -105,8 +108,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/jwt-auth.js" />
-        <option value="$PROJECT_DIR$/jwtauth.js" />
         <option value="$PROJECT_DIR$/Hash.js" />
+        <option value="$PROJECT_DIR$/jwtauth.js" />
         <option value="$PROJECT_DIR$/HungryApi.js" />
         <option value="$PROJECT_DIR$/ReadMe.md" />
       </list>
@@ -151,6 +154,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -171,7 +175,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -281,12 +284,13 @@
       <workItem from="1461578150649" duration="13060000" />
       <workItem from="1461596345406" duration="13176000" />
       <workItem from="1461844964856" duration="6716000" />
-      <workItem from="1461915847534" duration="19281000" />
+      <workItem from="1461915847534" duration="21194000" />
+      <workItem from="1462091315862" duration="17703000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="112783000" />
+    <option name="totallyTimeSpent" value="132399000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -295,7 +299,6 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17569546" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -308,6 +311,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -324,18 +328,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="23" />
+      <option name="time" value="25" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/vksdk/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3128">
-          <caret line="184" column="0" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -354,11 +351,13 @@
             <element signature="e#737#871#0" expanded="false" />
             <element signature="e#994#1066#0" expanded="false" />
             <element signature="e#1119#1571#0" expanded="false" />
-            <element signature="e#1628#4111#0" expanded="false" />
-            <element signature="e#4169#5055#0" expanded="false" />
-            <element signature="e#7712#10183#0" expanded="false" />
-            <element signature="e#10280#11972#0" expanded="false" />
-            <element signature="e#12032#12092#0" expanded="false" />
+            <element signature="e#1628#4067#0" expanded="false" />
+            <element signature="e#4125#5008#0" expanded="false" />
+            <element signature="e#5074#8305#0" expanded="false" />
+            <element signature="e#8364#11469#0" expanded="false" />
+            <element signature="e#13358#14634#0" expanded="false" />
+            <marker date="1462115486730" expanded="true" signature="12111:13291" placeholder="{...}" />
+            <marker date="1462115486730" expanded="true" signature="12339:13283" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -416,11 +415,13 @@
             <element signature="e#737#871#0" expanded="false" />
             <element signature="e#994#1066#0" expanded="false" />
             <element signature="e#1119#1571#0" expanded="false" />
-            <element signature="e#1628#4111#0" expanded="false" />
-            <element signature="e#4169#5055#0" expanded="false" />
-            <element signature="e#7712#10183#0" expanded="false" />
-            <element signature="e#10280#11972#0" expanded="false" />
-            <element signature="e#12032#12092#0" expanded="false" />
+            <element signature="e#1628#4067#0" expanded="false" />
+            <element signature="e#4125#5008#0" expanded="false" />
+            <element signature="e#5074#8305#0" expanded="false" />
+            <element signature="e#8364#11469#0" expanded="false" />
+            <element signature="e#13358#14634#0" expanded="false" />
+            <marker date="1462115486730" expanded="true" signature="12111:13291" placeholder="{...}" />
+            <marker date="1462115486730" expanded="true" signature="12339:13283" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -478,11 +479,13 @@
             <element signature="e#737#871#0" expanded="false" />
             <element signature="e#994#1066#0" expanded="false" />
             <element signature="e#1119#1571#0" expanded="false" />
-            <element signature="e#1628#4111#0" expanded="false" />
-            <element signature="e#4169#5055#0" expanded="false" />
-            <element signature="e#7712#10183#0" expanded="false" />
-            <element signature="e#10280#11972#0" expanded="false" />
-            <element signature="e#12032#12092#0" expanded="false" />
+            <element signature="e#1628#4067#0" expanded="false" />
+            <element signature="e#4125#5008#0" expanded="false" />
+            <element signature="e#5074#8305#0" expanded="false" />
+            <element signature="e#8364#11469#0" expanded="false" />
+            <element signature="e#13358#14634#0" expanded="false" />
+            <marker date="1462115486730" expanded="true" signature="12111:13291" placeholder="{...}" />
+            <marker date="1462115486730" expanded="true" signature="12339:13283" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -540,11 +543,13 @@
             <element signature="e#737#871#0" expanded="false" />
             <element signature="e#994#1066#0" expanded="false" />
             <element signature="e#1119#1571#0" expanded="false" />
-            <element signature="e#1628#4111#0" expanded="false" />
-            <element signature="e#4169#5055#0" expanded="false" />
-            <element signature="e#7712#10183#0" expanded="false" />
-            <element signature="e#10280#11972#0" expanded="false" />
-            <element signature="e#12032#12092#0" expanded="false" />
+            <element signature="e#1628#4067#0" expanded="false" />
+            <element signature="e#4125#5008#0" expanded="false" />
+            <element signature="e#5074#8305#0" expanded="false" />
+            <element signature="e#8364#11469#0" expanded="false" />
+            <element signature="e#13358#14634#0" expanded="false" />
+            <marker date="1462115486730" expanded="true" signature="12111:13291" placeholder="{...}" />
+            <marker date="1462115486730" expanded="true" signature="12339:13283" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -567,11 +572,13 @@
             <element signature="e#737#871#0" expanded="false" />
             <element signature="e#994#1066#0" expanded="false" />
             <element signature="e#1119#1571#0" expanded="false" />
-            <element signature="e#1628#4111#0" expanded="false" />
-            <element signature="e#4169#5055#0" expanded="false" />
-            <element signature="e#7712#10183#0" expanded="false" />
-            <element signature="e#10280#11972#0" expanded="false" />
-            <element signature="e#12032#12092#0" expanded="false" />
+            <element signature="e#1628#4067#0" expanded="false" />
+            <element signature="e#4125#5008#0" expanded="false" />
+            <element signature="e#5074#8305#0" expanded="false" />
+            <element signature="e#8364#11469#0" expanded="false" />
+            <element signature="e#13358#14634#0" expanded="false" />
+            <marker date="1462115486730" expanded="true" signature="12111:13291" placeholder="{...}" />
+            <marker date="1462115486730" expanded="true" signature="12339:13283" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -594,11 +601,13 @@
             <element signature="e#737#871#0" expanded="false" />
             <element signature="e#994#1066#0" expanded="false" />
             <element signature="e#1119#1571#0" expanded="false" />
-            <element signature="e#1628#4111#0" expanded="false" />
-            <element signature="e#4169#5055#0" expanded="false" />
-            <element signature="e#7712#10183#0" expanded="false" />
-            <element signature="e#10280#11972#0" expanded="false" />
-            <element signature="e#12032#12092#0" expanded="false" />
+            <element signature="e#1628#4067#0" expanded="false" />
+            <element signature="e#4125#5008#0" expanded="false" />
+            <element signature="e#5074#8305#0" expanded="false" />
+            <element signature="e#8364#11469#0" expanded="false" />
+            <element signature="e#13358#14634#0" expanded="false" />
+            <marker date="1462115486730" expanded="true" signature="12111:13291" placeholder="{...}" />
+            <marker date="1462115486730" expanded="true" signature="12339:13283" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -621,11 +630,13 @@
             <element signature="e#737#871#0" expanded="false" />
             <element signature="e#994#1066#0" expanded="false" />
             <element signature="e#1119#1571#0" expanded="false" />
-            <element signature="e#1628#4111#0" expanded="false" />
-            <element signature="e#4169#5055#0" expanded="false" />
-            <element signature="e#7712#10183#0" expanded="false" />
-            <element signature="e#10280#11972#0" expanded="false" />
-            <element signature="e#12032#12092#0" expanded="false" />
+            <element signature="e#1628#4067#0" expanded="false" />
+            <element signature="e#4125#5008#0" expanded="false" />
+            <element signature="e#5074#8305#0" expanded="false" />
+            <element signature="e#8364#11469#0" expanded="false" />
+            <element signature="e#13358#14634#0" expanded="false" />
+            <marker date="1462115486730" expanded="true" signature="12111:13291" placeholder="{...}" />
+            <marker date="1462115486730" expanded="true" signature="12339:13283" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -676,11 +687,17 @@
     <entry file="file://$PROJECT_DIR$/hungry.sql" />
     <entry file="file://$PROJECT_DIR$/jwtauth.js" />
     <entry file="file://$PROJECT_DIR$/jwt-auth.js" />
-    <entry file="file://$PROJECT_DIR$/jwtauth.js">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/javascript/nodejs/library/node-console-stub.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="49" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc;n#error#0;n#!!block;n#console#0;n#!!top" expanded="false" />
+            <element signature="n#!!doc;n#warn#0;n#!!block;n#console#0;n#!!top" expanded="false" />
+            <element signature="n#!!doc;n#dir#0;n#!!block;n#console#0;n#!!top" expanded="false" />
+            <element signature="n#!!doc;n#time#0;n#!!block;n#console#0;n#!!top" expanded="false" />
+            <element signature="n#!!doc;n#timeEnd#0;n#!!block;n#console#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -692,6 +709,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/jwtauth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Hash.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HungryApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="305" column="17" selection-start-line="305" selection-start-column="17" selection-end-line="305" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#1070#0" expanded="false" />
+            <element signature="e#737#871#0" expanded="false" />
+            <element signature="e#994#1066#0" expanded="false" />
+            <element signature="e#1119#1571#0" expanded="false" />
+            <element signature="e#1628#4067#0" expanded="false" />
+            <element signature="e#4125#5008#0" expanded="false" />
+            <element signature="e#5074#8305#0" expanded="false" />
+            <element signature="e#8364#11469#0" expanded="false" />
+            <element signature="e#13358#14634#0" expanded="false" />
+            <marker date="1462115486730" expanded="true" signature="12111:13291" placeholder="{...}" />
+            <marker date="1462115486730" expanded="true" signature="12339:13283" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ReadMe.md">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -700,38 +753,12 @@
         </state>
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="1" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
+        <state split_layout="SECOND">
+          <first_editor relative-caret-position="136">
+            <caret line="8" column="50" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
             <folding />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Hash.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HungryApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="189" column="42" selection-start-line="189" selection-start-column="42" selection-end-line="189" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#1070#0" expanded="false" />
-            <element signature="e#737#871#0" expanded="false" />
-            <element signature="e#994#1066#0" expanded="false" />
-            <element signature="e#1119#1571#0" expanded="false" />
-            <element signature="e#1628#4111#0" expanded="false" />
-            <element signature="e#4169#5055#0" expanded="false" />
-            <element signature="e#7712#10183#0" expanded="false" />
-            <element signature="e#10280#11972#0" expanded="false" />
-            <element signature="e#12032#12092#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
