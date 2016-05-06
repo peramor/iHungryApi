@@ -18,6 +18,7 @@
         user: 'root',
         database: "hungry",
         charset: "utf8"
+
     });
 
     var hash = require('./Hash.js'); // crypto
@@ -193,24 +194,29 @@ app.put('/api/registration', parser, function (req, response) {
             connection.query(request, params, function (err, res) {
                 error = {status: "error", text: "Ошибка на сервере. Попробуйте позже"}
                 if (!err) {
-                    console.log('токен добавлен в бд')
+                    console.log('токен добавлен в бд');
 
                     request = "UPDATE users set surname=?, name=?, gender=?," +
                         "phone=?, vk=?, dorm_id=?, flat=?, fac_id=?, pass=?, code=0 where email=? AND pass IS NULL ";
                     params = [surname, name, gender, phone, vk, dorm_id, flat, fac_id, pass, email];
                     connection.query(request, params, function (err, result) {
                         if (err || result.affectedRows == 0) {
-                            if (result.affectedRows == 0) {
-                                console.log('ERROR : ' + err);
-                                console.log(result);
-                                error.text = "Пользователь с таким email зарегистрирован";
-                            }
+                            console.log(err);
 
                             response.json(error);
                             connection.query("DELETE from tokens where refresh_token = ?", [hrt], function (err, result) {
                                 console.log('токен удален');
                             });
+
                         } else {
+                            if (result.affectedRows == 0) {
+                                console.log('ERROR : ' + err);
+                                console.log(result);
+                                error.text = "Пользователь с таким email зарегистрирован";
+                                response.json(error);
+                                return
+                            }
+
                             console.log("Пользователь зарегистрирован");
                             response.json({status: "success", accessToken: token, refreshToken: rt[1]});
                         }
