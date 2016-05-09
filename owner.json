@@ -1,0 +1,12 @@
+{
+  "id" : "1",
+  "info" : {
+    "name" : "Petr",
+    "surname" : "Petrov"
+  },
+  "dish" : {
+    "dish" : "banana",
+    "dishAbout" : "yellow",
+    "meetTime" : "0000"
+  }
+}

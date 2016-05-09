@@ -1,7 +1,7 @@
 var jwt = require('jwt-simple');
 var randtoken = require('rand-token');
 var moment = require('moment');
-var days = 14;
+var limit = 2;
 var secret = '1s72$медведь?_13ASDF';
 var sf = 'jwtauth.js' + '    | '; // stringFormat
 
@@ -14,7 +14,7 @@ function TokenValid(encodedToken){
         now = moment().unix();
         console.log(sf + 'exp = %d\n' + sf + 'now = %d', exp, now);
 
-        tokenValid = ((exp - now > 0) && (exp - now <= days * 24 * 60 * 60));
+        tokenValid = ((exp - now > 0) && (exp - now <= limit * 24 * 60 * 60));
         console.log(sf + 'проверка пройдена : ' + tokenValid);
     } catch(err){
         console.log(sf + 'ERROR не удалось декодировать маркер доступа : ' + err);
@@ -29,9 +29,9 @@ function Decode(encodedToken){
 
 function GetToken(iss, exptime, timetype) {
     console.log(sf + 'GetToken started..');
-    var expires = moment().add(exptime, timetype).unix(); // время смерти токена
+    expires = moment().add(exptime, timetype).unix(); // время смерти токена
     console.log(sf + 'Access Token Expires : ' + expires);
-    var token = jwt.encode({
+    token = jwt.encode({
         iss: iss,
         exp: expires
     }, secret);
@@ -41,14 +41,24 @@ function GetToken(iss, exptime, timetype) {
 
 function GetRefreshToken(iss, exptime, timetype){
     console.log(sf + "GetRefreshToken started..");
-    var token = randtoken.generate(32);
-    var expires = moment().add(exptime, timetype).unix();
+    token = randtoken.generate(32);
+    expires = moment().add(exptime, timetype).unix();
     console.log(sf + "Refresh Token : " + token);
     console.log(sf + "Refresh Token Expires : " + expires);
-    var refreshToken = [iss, token, expires];
+    refreshToken = [iss, token, expires];
     return refreshToken;
 }
 
+function CheckExp(exp) {
+    console.log(sf + 'CheckExp started..');
+    var now = moment().unix();
+    console.log(sf + 'now = ' + now);
+    expValid = (now<exp);
+    console.log(sf + "Проверка пройдена : " + expValid);
+    return expValid;
+}
+
+module.exports.CheckExp = CheckExp;
 module.exports.GetToken = GetToken;
 module.exports.TokenValid = TokenValid;
 module.exports.GetRefreshToken = GetRefreshToken;

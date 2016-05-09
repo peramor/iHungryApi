@@ -187,32 +187,35 @@ app.put('/api/registration', parser, function (req, response) {
             rt = jwt.GetRefreshToken(userID, refreshTokenLive, 'd');  // rt = [id, RefreshToken, Expires]
             hrt = hash(rt[1], rt[0].toString());
 
-            // todo: поменять запросы местами
             request = "INSERT into tokens (user_id, app_id, refresh_token, expires) value (?, ?, ?, ?)";
             params = [userID, appID, hrt, rt[2]];
             connection.query(request, params, function (err, res) {
-                error = {status: "error", text: "Ошибка на сервере. Попробуйте позже"}
+                var error = {status: "error", text: "Ошибка на сервере. Попробуйте позже"};
                 if (!err) {
-                    console.log('токен добавлен в бд')
+                    console.log('токен добавлен в бд');
 
                     request = "UPDATE users set surname=?, name=?, gender=?," +
                         "phone=?, vk=?, dorm_id=?, flat=?, fac_id=?, pass=?, code=0 where email=? AND pass IS NULL ";
                     params = [surname, name, gender, phone, vk, dorm_id, flat, fac_id, pass, email];
                     connection.query(request, params, function (err, result) {
-                        if (err || result.affectedRows == 0) {
+                        if (!err) {
                             if (result.affectedRows == 0) {
-                                console.log('ERROR : ' + err);
-                                console.log(result);
                                 error.text = "Пользователь с таким email зарегистрирован";
-                            }
+                                response.json(error);
 
+                                connection.query("DELETE from tokens where refresh_token = ?", [hrt], function (err, result) {
+                                    console.log('токен удален');
+                                });
+                            } else {
+                                console.log("Пользователь зарегистрирован");
+                                response.json({status: "success", accessToken: token, refreshToken: rt[1]});
+                            }
+                        } else {
+                            console.log("DBerror : " + err);
                             response.json(error);
                             connection.query("DELETE from tokens where refresh_token = ?", [hrt], function (err, result) {
                                 console.log('токен удален');
                             });
-                        } else {
-                            console.log("Пользователь зарегистрирован");
-                            response.json({status: "success", accessToken: token, refreshToken: rt[1]});
                         }
                     });
                 } else {
@@ -251,7 +254,7 @@ app.get('/api/login', parser, function (req, response) {
                     } else {
                         userID = result[0]['user_id'];
                         token = jwt.GetToken(userID, tokenLive, 'h'); // todo : поменять обратно на -> "h"
-                        rt = jwt.GetRefreshToken(userID, refreshTokenLive, 'days');
+                        rt = jwt.GetRefreshToken(userID, refreshTokenLive, 'days'); // todo : поменять обратно
                         hrt = hash(rt[1], rt[0].toString());
 
                         connection.query('select * from tokens where app_id = ?', [appID], function (err, result) {
@@ -308,6 +311,7 @@ app.post('/api/makeInvite', parser, function (req, res) {
         // .. запрос от приложения, с refresh token'ом
     } else {
         console.log('id = ' + token.iss);
+
         connection.query('insert into invitations (owner_id, dish, dish_about, meet_time) values (?,?,?,?)',
             [token.iss, dish, dishabout, meettime], function (err, result) {
                 error = {status : "error", text : "Ошибка на сервере. Попробуйте позже"}
@@ -324,49 +328,84 @@ app.post('/api/makeInvite', parser, function (req, res) {
                         ;
                     });
                 } else {
-                    console.log('ERROR : не создать запись в таблице invitations ' + err);
+                    console.log('ERROR : не удалось создать запись в таблице invitations ' + err);
                     res.json(error);
                 }
             });
     }
 });
 
-app.get('/api/updateToken', parser, function (req, response) {
+// todo: GET -> PUT
+app.put('/api/updateToken', parser, function (req, response) {
 // params = refreshToken, appID
-// response = {status : "null",
+// response = {status : "null", accessToken : "null"}
     var rt, appID, id, at;
 
-    console.log('\n_' + req.url + " started..")
-    rt = req.query.refreshToken;
-    appID = req.query.appID;
-
-    // todo: проверять refresh token
+    console.log('\n_' + req.url + " started..");
+    rt = req.body.refreshToken;
+    appID = req.body.appID;
+    console.log("appID = %s", appID);
 
     connection.query("select user_id, expires from tokens where app_id = ?", [appID], function (err, result) {
         if (result.length == 1) {
             var id = result[0]['user_id'];
-            console.log('user id ' + id);
-            rt = hash(rt, id);
+            var exp = result[0]['expires'];
+            console.log("id = %s, exp = %s", id, exp);
+            if (jwt.CheckExp(exp)){
+                rt = hash(rt, id);
 
-            connection.query("select * from tokens where user_id = ? and refresh_token = ?",
-                [id, rt], function (err, res) {
-                    if (result.length == 1) {
-                        id = result[0]['user_id'];
-                        console.log("совпадения найдены");
-                        at = jwt.GetToken(id, tokenLive, 'h');
-                        response.json({status: "success", accessToken: at})
-                    } else {
-                        response.json({status: "error"})
-                    }
+                connection.query("select * from tokens where app_id = ? and refresh_token = ?",
+                    [appID, rt], function (err, res) {
+                        if (res.length == 1) {
+                            console.log(res);
+                            console.log("совпадения найдены");
+                            at = jwt.GetToken(id, tokenLive, 'h');
+                            response.json({status: "success", accessToken: at})
+                        } else { // Если неверный токен
+                            console.log("Совпадения не найдены");
+                            response.json({status: "error"}); // todo : различать ошибки
+                        }
+                    });
+            } else { // Если время жизни токена истекло
+                response.json({status: "error"}); // todo: различать ошибки
+                connection.query("delete from tokens where app_id = ?", [appID], function(err){
+                    if (err) throw err;
+                    console.log("Токен удален");
                 });
-        } else {
-            console.log(result);
-            response.json({status: "error"});
+            }
+        } else { // Если appID не зарегистрирован
+            console.log("appID не зарегистрирован");
+            response.json({status: "error"}); // todo: различать ошибки
         }
     })
+});
 
-
-    /*
-     rt = jwt.GetRefreshToken(,refreshTokenLive, 'd');
-     request = 'update '  */
+app.put('/api/IHungry', parser, function (req, response) {
+    console.log('\n_' + req.url + ' started..');
+    var token = jwt.Decode(req.body.token);
+    connection.query('update users set status = -1 where user_id = ' + token.iss, function (err, result) {
+        if (!err) {
+            console.log('Статус пользователя изменен на guest');
+            response.json({status : 'success'});
+        } else {
+            console.log(err);
+            response.json({status : 'error', text : 'ошибка на сервере, попробуйте позже'});
+        }
+    })
 })
+
+app.get('/api/getList', parser, function(req,response){
+    token = req.body.token;
+    token = jwt.Decode(token);
+    var id = token.iss;
+
+    connection.query('select status from users where user_id = ' + id, function (err, result) {
+        if (!err) {
+            var status = result[0]['status'];
+            connection.query('select * from users where status = ', [0-status], function (err, result) {
+                console.log('tratata');
+                res.json(result);
+            })
+        }
+    })
+}) // сломанный костыль
