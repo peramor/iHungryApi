@@ -18,6 +18,7 @@
         user: 'root',
         database: "hungry",
         charset: "utf8"
+
     });
 
     var hash = require('./Hash.js'); // crypto
@@ -198,10 +199,15 @@ app.put('/api/registration', parser, function (req, response) {
                         "phone=?, vk=?, dorm_id=?, flat=?, fac_id=?, pass=?, code=0 where email=? AND pass IS NULL ";
                     params = [surname, name, gender, phone, vk, dorm_id, flat, fac_id, pass, email];
                     connection.query(request, params, function (err, result) {
+<<<<<<< HEAD
                         if (!err) {
                             if (result.affectedRows == 0) {
                                 error.text = "Пользователь с таким email зарегистрирован";
                                 response.json(error);
+=======
+                        if (err || result.affectedRows == 0) {
+                            console.log(err);
+>>>>>>> f1de07ac7666075e9b98fc012bb688228cfb5027
 
                                 connection.query("DELETE from tokens where refresh_token = ?", [hrt], function (err, result) {
                                     console.log('токен удален');
@@ -216,6 +222,21 @@ app.put('/api/registration', parser, function (req, response) {
                             connection.query("DELETE from tokens where refresh_token = ?", [hrt], function (err, result) {
                                 console.log('токен удален');
                             });
+<<<<<<< HEAD
+=======
+
+                        } else {
+                            if (result.affectedRows == 0) {
+                                console.log('ERROR : ' + err);
+                                console.log(result);
+                                error.text = "Пользователь с таким email зарегистрирован";
+                                response.json(error);
+                                return
+                            }
+
+                            console.log("Пользователь зарегистрирован");
+                            response.json({status: "success", accessToken: token, refreshToken: rt[1]});
+>>>>>>> f1de07ac7666075e9b98fc012bb688228cfb5027
                         }
                     });
                 } else {
