@@ -179,10 +179,10 @@ app.put('/api/registration', parser, function (req, response) {
     request = 'select user_id from users where email = ?';
     params = [email];
     connection.query(request, params, function (err, result) {
-        if (result.length == 0) {
+        if (result.length == 0) { // Если в users не найден email
             console.log("mail не зарегистрирован в системе");
             response.json({status: "error", text: "варификацмя email не была пройдена"});
-        } else {
+        } else { // Если найден email
             userID = result[0]['user_id'];
             token = jwt.GetToken(tokenLive, 'h');
             rt = jwt.GetRefreshToken(userID, refreshTokenLive, 'd');  // rt = [id, RefreshToken, Expires]
@@ -190,56 +190,36 @@ app.put('/api/registration', parser, function (req, response) {
 
             request = "INSERT into tokens (user_id, app_id, refresh_token, expires) value (?, ?, ?, ?)";
             params = [userID, appID, hrt, rt[2]];
-            connection.query(request, params, function (err, res) {
+            connection.query(request, params, function (err) {
                 var error = {status: "error", text: "Ошибка на сервере. Попробуйте позже"};
-                if (!err) {
+                if (!err) { // Если токен добавлен в БД
                     console.log('токен добавлен в бд');
 
                     request = "UPDATE users set surname=?, name=?, gender=?," +
                         "phone=?, vk=?, dorm_id=?, flat=?, fac_id=?, pass=?, code=0 where email=? AND pass IS NULL ";
                     params = [surname, name, gender, phone, vk, dorm_id, flat, fac_id, pass, email];
                     connection.query(request, params, function (err, result) {
-<<<<<<< HEAD
-                        if (!err) {
-                            if (result.affectedRows == 0) {
+                        if (!err) { // Если удается выполнить запрос
+                            if (result.affectedRows == 0) { // Если ни одна запись не изменена where email=? AND pass IS NULL
                                 error.text = "Пользователь с таким email зарегистрирован";
                                 response.json(error);
-=======
-                        if (err || result.affectedRows == 0) {
-                            console.log(err);
->>>>>>> f1de07ac7666075e9b98fc012bb688228cfb5027
-
-                                connection.query("DELETE from tokens where refresh_token = ?", [hrt], function (err, result) {
+                                connection.query("DELETE from tokens where refresh_token = ?", [hrt], function (err){
+                                    if (err) throw err;
                                     console.log('токен удален');
                                 });
-                            } else {
+                            } else { // если одна запись измененена - пользователь зарегистрирован
                                 console.log("Пользователь зарегистрирован");
                                 response.json({status: "success", accessToken: token, refreshToken: rt[1]});
                             }
-                        } else {
+                        } else { // Если не удается добавить пользователя
                             console.log("DBerror : " + err);
                             response.json(error);
                             connection.query("DELETE from tokens where refresh_token = ?", [hrt], function (err, result) {
                                 console.log('токен удален');
                             });
-<<<<<<< HEAD
-=======
-
-                        } else {
-                            if (result.affectedRows == 0) {
-                                console.log('ERROR : ' + err);
-                                console.log(result);
-                                error.text = "Пользователь с таким email зарегистрирован";
-                                response.json(error);
-                                return
-                            }
-
-                            console.log("Пользователь зарегистрирован");
-                            response.json({status: "success", accessToken: token, refreshToken: rt[1]});
->>>>>>> f1de07ac7666075e9b98fc012bb688228cfb5027
                         }
                     });
-                } else {
+                } else { // Если не удаётся выполнить запрос (null или значение appID не уникально)
                     console.log(err);
                     response.json(error)
                 }
@@ -356,7 +336,6 @@ app.post('/api/makeInvite', parser, function (req, res) {
     }
 });
 
-// todo: GET -> PUT
 app.put('/api/updateToken', parser, function (req, response) {
 // params = refreshToken, appID
 // response = {status : "null", accessToken : "null"}
@@ -401,6 +380,8 @@ app.put('/api/updateToken', parser, function (req, response) {
     })
 });
 
+
+/*
 app.put('/api/IHungry', parser, function (req, response) {
     console.log('\n_' + req.url + ' started..');
     var token = jwt.Decode(req.body.token);
@@ -429,4 +410,4 @@ app.get('/api/getList', parser, function(req,response){
             })
         }
     })
-}) // сломанный костыль
+}) */
