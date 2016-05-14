@@ -380,12 +380,11 @@ app.put('/api/updateToken', parser, function (req, response) {
     })
 });
 
-
-/*
 app.put('/api/IHungry', parser, function (req, response) {
     console.log('\n_' + req.url + ' started..');
     var token = jwt.Decode(req.body.token);
-    connection.query('update users set status = -1 where user_id = ' + token.iss, function (err, result) {
+    // todo: проверять баланс пользователя, если невозможно снять одну печеньку, отправить error
+    connection.query('update users set status = ? where user_id = ?', ['guest', token.iss], function (err, result) {
         if (!err) {
             console.log('Статус пользователя изменен на guest');
             response.json({status : 'success'});
@@ -396,18 +395,50 @@ app.put('/api/IHungry', parser, function (req, response) {
     })
 })
 
-app.get('/api/getList', parser, function(req,response){
-    token = req.body.token;
-    token = jwt.Decode(token);
+app.get('/api/getList', parser, function(req,response) {
+// params : token
+// response = {"status" : "null", ...}
+    console.log("_getList started..")
+    token = jwt.Decode(req.query.token);
     var id = token.iss;
 
     connection.query('select status from users where user_id = ' + id, function (err, result) {
         if (!err) {
-            var status = result[0]['status'];
-            connection.query('select * from users where status = ', [0-status], function (err, result) {
-                console.log('tratata');
-                res.json(result);
+            status = result[0]['status'];
+            switch (status) {
+                case "owner":
+                    request = "select * from users where status = 'guest'";
+                    break;
+                case "guest":
+                    request = "select * from users where status = 'owner'";
+                    break;
+                default:
+                    response.json({status: "error"});
+                    return;
+            }
+/*
+1. Определить статус пользователя
+--2. Если статус пользователя owner выбрать из таблицы пользователей все записи, где статус = guest
+3. Если статус пользователя guest выбрать из таблицы пользователей все записи, где статус = owner
+4. Выбрать все* записи из таблицы invitations, где статус приглашения active // * - dish, dishabout, meettime, owner_id
+5. Отсортировать полученный список по user_id
+6. Соеденить массив из 2(3) с массивом из 5
+7. Отправить полученный json
+ */
+            connection.query(request, function(err, res){
+                if (!err) {
+                    user = res;
+                    console.log(user);
+                    response.json({status : "success", user : user});
+                    //todo: отправлять диш и дишабоут
+                } else {
+                    console.log(err);
+                    response.json({status : "error"});
+                }
             })
+        }else {
+            console.log(err);
+            response.json({status:"error"});
         }
     })
-}) */
+})
