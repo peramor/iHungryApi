@@ -14,12 +14,11 @@
     var mysql = require('mysql'),
         mysqlUtilities = require('mysql-utilities');
     var connection = mysql.createConnection({
-        host: 'hungry.styleru.net',
+        host: 'localhost',
         user: 'hungry',
         password: "C5tyVKTD",
         database: "hungry",
-        charset: "utf8",
-        port: "8000"
+        charset: "utf8"
     });
 
     var hash = require('./Hash.js'); // crypto
@@ -37,8 +36,8 @@
     mysqlUtilities.upgrade(connection);
     mysqlUtilities.introspection(connection);
 
-    app.listen(8000, function () {
-        console.log('Express server is listening on port 8000');
+    app.listen(1337, function () {
+        console.log('Express server is listening on port 1337');
     });
 }
 
