@@ -14,11 +14,12 @@
     var mysql = require('mysql'),
         mysqlUtilities = require('mysql-utilities');
     var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
+        host: 'hungry.styleru.net',
+        user: 'hungry',
+        password: "C5tyVKTD",
         database: "hungry",
-        charset: "utf8"
-
+        charset: "utf8",
+        port: "8000"
     });
 
     var hash = require('./Hash.js'); // crypto
