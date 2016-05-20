@@ -304,7 +304,7 @@ app.post('/api/makeInvite', parser, function (req, res) {
     dishabout = req.body.dishAbout;
     meettime = req.body.meetTime;
 
-    console.log('token = %s\ndish = %s\ndishabout = %s\nmeettime = %s', token, dish, dishabout, meettime);
+//    console.log('token = %s\ndish = %s\ndishabout = %s\nmeettime = %s', token, dish, dishabout, meettime);
 
     if (!jwt.TokenValid(token)) {
         console.log('INVALID TOKEN')
@@ -313,11 +313,19 @@ app.post('/api/makeInvite', parser, function (req, res) {
     } else {
         console.log('id = ' + token.iss);
 
-        connection.query('insert into invitations (owner_id, dish, dish_about, meet_time) values (?,?,?,?)',
-            [token.iss, dish, dishabout, meettime], function (err, result) {
-                error = {status : "error", text : "Ошибка на сервере. Попробуйте позже"}
+        connection.query('insert into invitations (owner_id, dish, dish_about, meet_time) values (?,?,?,?)'
+            , [token.iss, dish, dishabout, meettime]
+            , function (err, result) {
+                invite_id = result.insertId;
+                error = {status : "error", text : "Ошибка на сервере. Попробуйте позже"};
                 if (!err) {
-                    console.log('запись добавлена в таблицу invitations')
+                    console.log('запись добавлена в таблицу invitations');
+                    connection.query("insert into meets (invite_id) values (?)", [invite_id], function(err){
+                        if (err) {
+                            res.json(error);
+                            throw err;
+                        }
+                    });
                     connection.query('update users set status = ? where user_id = ?', ["owner", token.iss], function (err, result) {
                         if (!err) {
                             console.log('статус пользователя изменен на "owner"');
@@ -325,8 +333,7 @@ app.post('/api/makeInvite', parser, function (req, res) {
                         } else {
                             console.log('ERROR : не удалось обновить статус пользователя -> ' + err);
                             res.json(error);
-                        }
-                        ;
+                        };
                     });
                 } else {
                     console.log('ERROR : не удалось создать запись в таблице invitations ' + err);
@@ -381,64 +388,74 @@ app.put('/api/updateToken', parser, function (req, response) {
 });
 
 app.put('/api/IHungry', parser, function (req, response) {
+// parans = token
+// response = {status, owners : {meet_id, name, surname, gender, dorm_name, dish, dish_about, meet_time, status}}
     console.log('\n_' + req.url + ' started..');
-    var token = jwt.Decode(req.body.token);
+    token = req.body.token;
+    var status = "guest";
+
+    if (!jwt.TokenValid(token)) {
+        console.log("invalid token");
+        response.json({status:"invalid token"});
+        return;
+    }
+
     // todo: проверять баланс пользователя, если невозможно снять одну печеньку, отправить error
-    connection.query('update users set status = ? where user_id = ?', ['guest', token.iss], function (err, result) {
+    connection.query('update users set status = ? where user_id = ?', [status, token.iss], function (err, result) {
         if (!err) {
             console.log('Статус пользователя изменен на guest');
-            response.json({status : 'success'});
+            connection.query("SELECT meets.meet_id, users.name, users.surname, users.gender, dorms.dorm_name, invitations.dish, invitations.dish_about, invitations.meet_time, meets.status " +
+                "FROM users, invitations, meets, dorms " +
+                "WHERE users.user_id = invitations.owner_id AND meets.invite_id = invitations.invite_id AND dorms.dorm_id = users.dorm_id " +
+                "ORDER BY invitations.meet_time " +
+                "LIMIT 0, 10 ", function (err, result) {
+                response.json({status : "success", owners : result});
+            });
         } else {
             console.log(err);
             response.json({status : 'error', text : 'ошибка на сервере, попробуйте позже'});
         }
     })
-})
+});
+
+
+
+
+// в разработке --------------------------------------------------------------------------------------------------------------------
 
 app.get('/api/getList', parser, function(req,response) {
-// params : token
-// response = {"status" : "null", ...}
-    console.log("_getList started..")
-    token = jwt.Decode(req.query.token);
-    var id = token.iss;
+    var status = req.query.status;
+    if (status == "guest") {
+        connection.query("SELECT users.name, users.surname, users.gender, dorms.dorm_name, invitations.dish, invitations.dish_about, invitations.meet_time, meets.status " +
+            "FROM users, invitations, meets, dorms " +
+            "WHERE users.user_id = invitations.owner_id AND meets.invite_id = invitations.invite_id AND dorms.dorm_id = users.dorm_id " +
+            "ORDER BY invitations.meet_time " +
+            "LIMIT 0, 10 ", function (err, result) {
+            response.json(result);
+        });
+    }
+});
 
-    connection.query('select status from users where user_id = ' + id, function (err, result) {
-        if (!err) {
-            status = result[0]['status'];
-            switch (status) {
-                case "owner":
-                    request = "select * from users where status = 'guest'";
-                    break;
-                case "guest":
-                    request = "select * from users where status = 'owner'";
-                    break;
-                default:
-                    response.json({status: "error"});
-                    return;
-            }
-/*
-1. Определить статус пользователя
---2. Если статус пользователя owner выбрать из таблицы пользователей все записи, где статус = guest
-3. Если статус пользователя guest выбрать из таблицы пользователей все записи, где статус = owner
-4. Выбрать все* записи из таблицы invitations, где статус приглашения active // * - dish, dishabout, meettime, owner_id
-5. Отсортировать полученный список по user_id
-6. Соеденить массив из 2(3) с массивом из 5
-7. Отправить полученный json
- */
-            connection.query(request, function(err, res){
-                if (!err) {
-                    user = res;
-                    console.log(user);
-                    response.json({status : "success", user : user});
-                    //todo: отправлять диш и дишабоут
-                } else {
-                    console.log(err);
-                    response.json({status : "error"});
-                }
-            })
-        }else {
-            console.log(err);
-            response.json({status:"error"});
-        }
-    })
-})
+function GetList(status) {
+    console.log("status = " + status);
+    var list;
+    if (status == "owner") {
+        connection.query("select * from users where status = 'guest'", function (err, res) {
+            return res;
+        });
+
+    } else if (status == "guest") {
+        connection.query("SELECT users.name, users.surname, users.gender, invitations.dish, invitations.dish_about, invitations.meet_time, meets.status " +
+            "FROM users, invitations, meets " +
+            "WHERE users.user_id = invitations.owner_id AND meets.invite_id = invitations.invite_id " +
+            "LIMIT 0, 10 ", function (err,result) {
+            list = result;
+        });
+
+    } else {
+
+    }
+
+    console.log("list = " + list);
+    return list;
+}

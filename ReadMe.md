@@ -1,21 +1,4 @@
-my message:
-> 09/05/2016 SQL теперь читает русские символы,
-следует обновить свои. (ВАЖНО) метод /api/updateToken изменене на PUT.
-Исправлена ошибка в Registrations из-за
-которой сервер падал. Проверяется refreshToken при обработке updateToken.
-Ошибка возвращается, если время жизни токена истекло (365 дней по умолчанию)
-или appID отсутствует в базе или неверный токен.
-
-> Была немного изменена архитектура БД, поэтому прилагаемый sql
-файл необходимо импортировать к себе. Также был добавлен параметр
-appID - это уникальный идентификатор устройства пользователя. Так
-как для определения client_id нужно сильно заморачиваться, я решил,
-что мы можем генерировать уникальный идентификатор приложения, который
-создается при инсталяции приложения. Сейчас его не обязательно
-внедрять в код, но без него некоторые запросы работать не будут, поэтому
-нужно отправлять его (любое значение). Good LucK..
-
-all api/requests
+﻿all api/requests
 ----------------
 - [ ] /api/sendMail
 - [ ] /api/checkCode
@@ -23,6 +6,27 @@ all api/requests
 - [x] /api/login
 - [x] /api/makeInvite
 - [x] /api/updateToken
+- [x] /api/IHungry
+
+/api/IHungry (PUT)
+==================
+Patameters:
+----------
+* token
+
+Response
+--------
+*status, owners : {meet_id, name, surname, gender, dorm_name, dish, dish_about, meet_time, status}*
+
+**token has expired or token is incorrect**
+- status : "invalid token"
+
+**server error**
+- status : "error"
+
+**else**
+- status : "success"
+- owners : {meet_id, name, surname, gender, dorm_name, dish, dish_about, meet_time, status} - **10 rows sorted by meet_time (from higher to lower)**
 
 /api/registration (PUT)
 =======================

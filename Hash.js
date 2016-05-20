@@ -12,6 +12,6 @@ var hash = function(data, salt){
     }
     return data;
     // todo : возвращать ошибку
-}
+};
 
 module.exports = hash;
