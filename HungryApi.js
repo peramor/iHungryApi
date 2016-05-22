@@ -6,6 +6,7 @@
     var parser = bodyParser.urlencoded({
         extended: true
     });
+    var moment = require('moment');
 
     var jwt = require('./jwtauth.js');
     var tokenLive = 1; // hour
@@ -404,11 +405,12 @@ app.put('/api/IHungry', parser, function (req, response) {
     connection.query('update users set status = ? where user_id = ?', [status, token.iss], function (err, result) {
         if (!err) {
             console.log('Статус пользователя изменен на guest');
-            connection.query("SELECT meets.meet_id, users.name, users.surname, users.gender, dorms.dorm_name, invitations.dish, invitations.dish_about, invitations.meet_time, meets.status " +
+            connection.query("SELECT invitations.invite_id, users.name, users.surname, users.gender, dorms.dorm_name, invitations.dish, invitations.dish_about, invitations.meet_time, meets.status " +
                 "FROM users, invitations, meets, dorms " +
                 "WHERE users.user_id = invitations.owner_id AND meets.invite_id = invitations.invite_id AND dorms.dorm_id = users.dorm_id " +
-                "ORDER BY invitations.meet_time " +
-                "LIMIT 0, 10 ", function (err, result) {
+                "ORDER BY invitations.meet_time " + // todo: сортировать по времени в порядке возрастания
+                "LIMIT 0, 20 "
+                , function (err, result) {
                 response.json({status : "success", owners : result});
             });
         } else {
@@ -420,8 +422,39 @@ app.put('/api/IHungry', parser, function (req, response) {
 
 
 
-
 // в разработке --------------------------------------------------------------------------------------------------------------------
+
+app.get('/api/updateOwnersList', parser, function(req, response){
+    console.log('\n_' + req.url + ' started..');
+    token = req.query.token;
+    var status = "guest";
+    var ctime = moment().unix();
+
+   /* if (!jwt.TokenValid(token)) {
+        console.log("invalid token");
+        response.json({status:"invalid token"});
+        return;
+    }
+
+    connection.query("select meet_time from invitations where meet_time<" + ctime, function(err, res){
+        t = res[0]['meet_time'];
+        console.log(t);
+        console.log(ctime);
+        console.log(t<ctime);
+        console.log(t>ctime);
+        response.json(res)
+    });
+*/
+    connection.query("SELECT invitations.invite_id, users.name, users.surname, users.gender, dorms.dorm_name, invitations.dish, invitations.dish_about, invitations.meet_time, meets.status " +
+        "FROM users, invitations, meets, dorms " +
+        "WHERE users.user_id = invitations.owner_id AND meets.invite_id = invitations.invite_id AND dorms.dorm_id = users.dorm_id AND invitations.meet_time > " + ctime + " " +
+        "ORDER BY invitations.meet_time " + // todo: сортировать по времени в порядке возрастания
+        "LIMIT 0, 20 "
+        , function (err, result) {
+            response.json({status : "success", owners : result});
+        });
+
+});
 
 app.get('/api/getList', parser, function(req,response) {
     var status = req.query.status;

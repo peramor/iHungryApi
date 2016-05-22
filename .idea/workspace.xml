@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5dd84101-8cee-445b-b240-b18f075e532d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Hash.js" afterPath="$PROJECT_DIR$/Hash.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HungryApi.js" afterPath="$PROJECT_DIR$/HungryApi.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ReadMe.md" afterPath="$PROJECT_DIR$/ReadMe.md" />
     </list>
@@ -26,12 +25,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ReadMe.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReadMe.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ReadMe.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <first_editor relative-caret-position="17">
+                <caret line="1" column="56" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -39,25 +38,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HungryApi.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HungryApi.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HungryApi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="391" column="112" selection-start-line="391" selection-start-column="23" selection-end-line="391" selection-end-column="112" />
+            <state relative-caret-position="306">
+              <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
               <folding>
-                <element signature="e#0#1071#0" expanded="false" />
-                <element signature="e#1120#1572#0" expanded="false" />
-                <element signature="e#1629#4068#0" expanded="false" />
-                <element signature="e#4126#5009#0" expanded="false" />
-                <element signature="e#5075#8910#0" expanded="false" />
-                <element signature="e#8969#12101#0" expanded="false" />
-                <element signature="e#12161#14250#0" expanded="false" />
-                <element signature="e#14315#16197#0" expanded="false" />
-                <element signature="e#17880#18467#0" expanded="false" />
+                <element signature="e#1156#1608#0" expanded="false" />
+                <element signature="e#4162#5045#0" expanded="false" />
+                <element signature="e#5111#8946#0" expanded="false" />
+                <element signature="e#9005#12137#0" expanded="false" />
+                <element signature="e#12197#14286#0" expanded="false" />
+                <element signature="e#14351#16233#0" expanded="false" />
+                <element signature="e#16564#16674#0" expanded="false" />
+                <element signature="e#19289#19876#0" expanded="false" />
                 <element signature="n#!!block;n#GetList#0" expanded="false" />
-                <element signature="e#18671#18706#0" expanded="false" />
-                <marker date="1463774836658" expanded="false" signature="16528:16638" placeholder="{...}" />
+                <element signature="e#20080#20115#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hungry (brand new).sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hungry (brand new).sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="106" selection-end-column="57" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -75,8 +82,8 @@
       <file leaf-file-name="jwtauth.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jwtauth.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
+            <state relative-caret-position="170">
+              <caret line="56" column="9" selection-start-line="56" selection-start-column="9" selection-end-line="56" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -112,8 +119,8 @@
         <option value="$PROJECT_DIR$/test.js" />
         <option value="$PROJECT_DIR$/jwtauth.js" />
         <option value="$PROJECT_DIR$/Hash.js" />
-        <option value="$PROJECT_DIR$/HungryApi.js" />
         <option value="$PROJECT_DIR$/ReadMe.md" />
+        <option value="$PROJECT_DIR$/HungryApi.js" />
       </list>
     </option>
   </component>
@@ -155,8 +162,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -177,6 +182,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -294,12 +301,14 @@
       <workItem from="1462788600297" duration="5494000" />
       <workItem from="1462799046427" duration="1345000" />
       <workItem from="1463147131087" duration="6240000" />
-      <workItem from="1463742529294" duration="19880000" />
+      <workItem from="1463742529294" duration="20182000" />
+      <workItem from="1463859455564" duration="46000" />
+      <workItem from="1463933199817" duration="8858000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="174296000" />
+    <option name="totallyTimeSpent" value="183502000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -310,7 +319,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -337,18 +346,18 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="40" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/HungryApi.js</url>
+          <properties />
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="41" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/body-parser/lib/types/json.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/body-parser/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -391,83 +400,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#1071#0" expanded="false" />
-            <element signature="e#1120#1572#0" expanded="false" />
-            <element signature="e#1629#4068#0" expanded="false" />
-            <element signature="e#4126#5009#0" expanded="false" />
-            <element signature="e#5075#8910#0" expanded="false" />
-            <element signature="e#8969#12101#0" expanded="false" />
-            <element signature="e#12161#14250#0" expanded="false" />
-            <element signature="e#14315#16197#0" expanded="false" />
-            <element signature="e#17880#18467#0" expanded="false" />
+            <element signature="e#1156#1608#0" expanded="false" />
+            <element signature="e#4162#5045#0" expanded="false" />
+            <element signature="e#5111#8946#0" expanded="false" />
+            <element signature="e#9005#12137#0" expanded="false" />
+            <element signature="e#12197#14286#0" expanded="false" />
+            <element signature="e#14351#16233#0" expanded="false" />
+            <element signature="e#16564#16674#0" expanded="false" />
+            <element signature="e#19289#19876#0" expanded="false" />
             <element signature="n#!!block;n#GetList#0" expanded="false" />
-            <element signature="e#18671#18706#0" expanded="false" />
-            <marker date="1463774836658" expanded="false" signature="16528:16638" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/body-parser/lib/types/json.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/body-parser/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/body-parser/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/vksdk/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/vksdk/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3128">
-          <caret line="184" column="0" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hungry.sql" />
-    <entry file="file://$PROJECT_DIR$/HungryApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#1071#0" expanded="false" />
-            <element signature="e#1120#1572#0" expanded="false" />
-            <element signature="e#1629#4068#0" expanded="false" />
-            <element signature="e#4126#5009#0" expanded="false" />
-            <element signature="e#5075#8910#0" expanded="false" />
-            <element signature="e#8969#12101#0" expanded="false" />
-            <element signature="e#12161#14250#0" expanded="false" />
-            <element signature="e#14315#16197#0" expanded="false" />
-            <element signature="e#17880#18467#0" expanded="false" />
-            <element signature="n#!!block;n#GetList#0" expanded="false" />
-            <element signature="e#18671#18706#0" expanded="false" />
-            <marker date="1463774836658" expanded="false" signature="16528:16638" placeholder="{...}" />
+            <element signature="e#20080#20115#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -521,18 +463,79 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#1071#0" expanded="false" />
-            <element signature="e#1120#1572#0" expanded="false" />
-            <element signature="e#1629#4068#0" expanded="false" />
-            <element signature="e#4126#5009#0" expanded="false" />
-            <element signature="e#5075#8910#0" expanded="false" />
-            <element signature="e#8969#12101#0" expanded="false" />
-            <element signature="e#12161#14250#0" expanded="false" />
-            <element signature="e#14315#16197#0" expanded="false" />
-            <element signature="e#17880#18467#0" expanded="false" />
+            <element signature="e#1156#1608#0" expanded="false" />
+            <element signature="e#4162#5045#0" expanded="false" />
+            <element signature="e#5111#8946#0" expanded="false" />
+            <element signature="e#9005#12137#0" expanded="false" />
+            <element signature="e#12197#14286#0" expanded="false" />
+            <element signature="e#14351#16233#0" expanded="false" />
+            <element signature="e#16564#16674#0" expanded="false" />
+            <element signature="e#19289#19876#0" expanded="false" />
             <element signature="n#!!block;n#GetList#0" expanded="false" />
-            <element signature="e#18671#18706#0" expanded="false" />
-            <marker date="1463774836658" expanded="false" signature="16528:16638" placeholder="{...}" />
+            <element signature="e#20080#20115#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/body-parser/lib/types/json.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/body-parser/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/body-parser/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/vksdk/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/vksdk/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3128">
+          <caret line="184" column="0" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hungry.sql" />
+    <entry file="file://$PROJECT_DIR$/HungryApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1156#1608#0" expanded="false" />
+            <element signature="e#4162#5045#0" expanded="false" />
+            <element signature="e#5111#8946#0" expanded="false" />
+            <element signature="e#9005#12137#0" expanded="false" />
+            <element signature="e#12197#14286#0" expanded="false" />
+            <element signature="e#14351#16233#0" expanded="false" />
+            <element signature="e#16564#16674#0" expanded="false" />
+            <element signature="e#19289#19876#0" expanded="false" />
+            <element signature="n#!!block;n#GetList#0" expanded="false" />
+            <element signature="e#20080#20115#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -551,18 +554,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#1071#0" expanded="false" />
-            <element signature="e#1120#1572#0" expanded="false" />
-            <element signature="e#1629#4068#0" expanded="false" />
-            <element signature="e#4126#5009#0" expanded="false" />
-            <element signature="e#5075#8910#0" expanded="false" />
-            <element signature="e#8969#12101#0" expanded="false" />
-            <element signature="e#12161#14250#0" expanded="false" />
-            <element signature="e#14315#16197#0" expanded="false" />
-            <element signature="e#17880#18467#0" expanded="false" />
+            <element signature="e#1156#1608#0" expanded="false" />
+            <element signature="e#4162#5045#0" expanded="false" />
+            <element signature="e#5111#8946#0" expanded="false" />
+            <element signature="e#9005#12137#0" expanded="false" />
+            <element signature="e#12197#14286#0" expanded="false" />
+            <element signature="e#14351#16233#0" expanded="false" />
+            <element signature="e#16564#16674#0" expanded="false" />
+            <element signature="e#19289#19876#0" expanded="false" />
             <element signature="n#!!block;n#GetList#0" expanded="false" />
-            <element signature="e#18671#18706#0" expanded="false" />
-            <marker date="1463774836658" expanded="false" signature="16528:16638" placeholder="{...}" />
+            <element signature="e#20080#20115#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -581,18 +582,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#1071#0" expanded="false" />
-            <element signature="e#1120#1572#0" expanded="false" />
-            <element signature="e#1629#4068#0" expanded="false" />
-            <element signature="e#4126#5009#0" expanded="false" />
-            <element signature="e#5075#8910#0" expanded="false" />
-            <element signature="e#8969#12101#0" expanded="false" />
-            <element signature="e#12161#14250#0" expanded="false" />
-            <element signature="e#14315#16197#0" expanded="false" />
-            <element signature="e#17880#18467#0" expanded="false" />
+            <element signature="e#1156#1608#0" expanded="false" />
+            <element signature="e#4162#5045#0" expanded="false" />
+            <element signature="e#5111#8946#0" expanded="false" />
+            <element signature="e#9005#12137#0" expanded="false" />
+            <element signature="e#12197#14286#0" expanded="false" />
+            <element signature="e#14351#16233#0" expanded="false" />
+            <element signature="e#16564#16674#0" expanded="false" />
+            <element signature="e#19289#19876#0" expanded="false" />
             <element signature="n#!!block;n#GetList#0" expanded="false" />
-            <element signature="e#18671#18706#0" expanded="false" />
-            <marker date="1463774836658" expanded="false" signature="16528:16638" placeholder="{...}" />
+            <element signature="e#20080#20115#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -611,18 +610,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#1071#0" expanded="false" />
-            <element signature="e#1120#1572#0" expanded="false" />
-            <element signature="e#1629#4068#0" expanded="false" />
-            <element signature="e#4126#5009#0" expanded="false" />
-            <element signature="e#5075#8910#0" expanded="false" />
-            <element signature="e#8969#12101#0" expanded="false" />
-            <element signature="e#12161#14250#0" expanded="false" />
-            <element signature="e#14315#16197#0" expanded="false" />
-            <element signature="e#17880#18467#0" expanded="false" />
+            <element signature="e#1156#1608#0" expanded="false" />
+            <element signature="e#4162#5045#0" expanded="false" />
+            <element signature="e#5111#8946#0" expanded="false" />
+            <element signature="e#9005#12137#0" expanded="false" />
+            <element signature="e#12197#14286#0" expanded="false" />
+            <element signature="e#14351#16233#0" expanded="false" />
+            <element signature="e#16564#16674#0" expanded="false" />
+            <element signature="e#19289#19876#0" expanded="false" />
             <element signature="n#!!block;n#GetList#0" expanded="false" />
-            <element signature="e#18671#18706#0" expanded="false" />
-            <marker date="1463774836658" expanded="false" signature="16528:16638" placeholder="{...}" />
+            <element signature="e#20080#20115#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -691,48 +688,11 @@
     <entry file="file://$PROJECT_DIR$/test.js" />
     <entry file="file://$PROJECT_DIR$/owner.json" />
     <entry file="file://$PROJECT_DIR$/hungry (new).sql" />
-    <entry file="file://$PROJECT_DIR$/Hash.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jwtauth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HungryApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="391" column="112" selection-start-line="391" selection-start-column="23" selection-end-line="391" selection-end-column="112" />
-          <folding>
-            <element signature="e#0#1071#0" expanded="false" />
-            <element signature="e#1120#1572#0" expanded="false" />
-            <element signature="e#1629#4068#0" expanded="false" />
-            <element signature="e#4126#5009#0" expanded="false" />
-            <element signature="e#5075#8910#0" expanded="false" />
-            <element signature="e#8969#12101#0" expanded="false" />
-            <element signature="e#12161#14250#0" expanded="false" />
-            <element signature="e#14315#16197#0" expanded="false" />
-            <element signature="e#17880#18467#0" expanded="false" />
-            <element signature="n#!!block;n#GetList#0" expanded="false" />
-            <element signature="e#18671#18706#0" expanded="false" />
-            <marker date="1463774836658" expanded="false" signature="16528:16638" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ReadMe.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <first_editor relative-caret-position="17">
+            <caret line="1" column="56" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
             <folding />
           </first_editor>
           <second_editor />
@@ -742,6 +702,49 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Hash.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hungry (brand new).sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="106" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jwtauth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="56" column="9" selection-start-line="56" selection-start-column="9" selection-end-line="56" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HungryApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+          <folding>
+            <element signature="e#1156#1608#0" expanded="false" />
+            <element signature="e#4162#5045#0" expanded="false" />
+            <element signature="e#5111#8946#0" expanded="false" />
+            <element signature="e#9005#12137#0" expanded="false" />
+            <element signature="e#12197#14286#0" expanded="false" />
+            <element signature="e#14351#16233#0" expanded="false" />
+            <element signature="e#16564#16674#0" expanded="false" />
+            <element signature="e#19289#19876#0" expanded="false" />
+            <element signature="n#!!block;n#GetList#0" expanded="false" />
+            <element signature="e#20080#20115#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,12 +1,15 @@
-﻿all api/requests
+﻿**Список изменений:**
+* (22.05.16) в списке owners вместо meet_id -> invite_id
+
+all api/requests
 ----------------
-- [ ] /api/sendMail
-- [ ] /api/checkCode
-- [x] /api/registration
-- [x] /api/login
-- [x] /api/makeInvite
-- [x] /api/updateToken
-- [x] /api/IHungry
+- [ ] /api/sendMail (PUT)
+- [ ] /api/checkCode (GET)
+- [x] /api/registration (PUT)
+- [x] /api/login (GET)
+- [x] /api/makeInvite (POST)
+- [x] /api/updateToken (PUT)
+- [x] /api/IHungry (PUT)
 
 /api/IHungry (PUT)
 ==================
@@ -121,7 +124,7 @@ Response:
 - status : "error"
 - text : "Ошибка на сервере. Попробуйте позже"
 
-/api/updateToken (GET)
+/api/updateToken (PUT)
 ================
 Parameters:
 ----------
