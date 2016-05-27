@@ -1,0 +1,27 @@
+﻿rmaltsev@edu.hse.ru
+  "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc1LCJleHAiOjE0NjM3NzE3NjJ9.daZwRgn_YqYLn_M_YqT-c6yiLpH2pBmJXjjKZwRflDM",
+  
+  "refreshToken": "xKWgA55D1MbDibZEFOLNzRJzpVK7Q1Ba"
+"pass": Роман
+owner
+
+rmatiev@edu.hse.ru
+  "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc2LCJleHAiOjE0NjM3Nzc1MjR9.yTSrqNz3noP33THsy2SCSlPPkC3e7pxJE8ZmBU-QdWY",
+
+  "refreshToken": "gtzNohNUUQ06kRbHxVcWR23mEY9ld0ba"
+"pass": Рустем
+guest
+
+nlopatov@edu.hse.ru
+  "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc3LCJleHAiOjE0NjM3NzQwOTh9.o4CrT5UY0Aa59M7NinQaDRje96YV4pJTvMR_T2FTsN4",
+  
+  "refreshToken": "SJFX3IfYmBzjMqU2OutCDS2Tkaum0WVC"
+"pass": Никита
+owner
+
+aloshkarev@edu.hse.ru
+  "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc4LCJleHAiOjE0NjM3NzQyNTB9.Amoj-xekk0Ddd-iDEsSUM5TWUV9bESbYSTvdpCjO01A",
+  
+  "refreshToken": "X4yK0li77GzjbvdEg69YWafOphVZB2BQ"
+"pass": Антон
+guest

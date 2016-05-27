@@ -1,0 +1,18 @@
+Express server is listening on port 1337
+Database is connected
+
+/db/get?table=users started..
+- > TABLE users
+
+
+/db/get?table=users started..
+- > TABLE users
+
+
+/db/get?table=tokens started..
+- > TABLE tokens
+
+
+/db/get?table=invitations started..
+- > TABLE invitations
+
