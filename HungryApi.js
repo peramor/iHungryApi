@@ -14,26 +14,43 @@
 
     var mysql = require('mysql'),
         mysqlUtilities = require('mysql-utilities');
-    var connection = mysql.createConnection({
+
+    var db_config = {
         host: 'localhost',
         user: 'hungry',
         password: "C5tyVKTD",
         database: "hungry",
         charset: "utf8"
-    });
+    };
+
+    var connection;
 
     var hash = require('./Hash.js'); // crypto
 
     app.use(parser);
     app.use(bodyParser.json());
 
-    connection.connect(function (err) {
-        if (!err) {
-            console.log("Database is connected");
-        } else {
-            console.log(err);
-        }
-    });
+    function handleDisconnect() {
+        connection = mysql.createConnection(db_config);
+
+        connection.connect(function(err){
+            if (err) {
+                console.log('error when connectiong to db: ', err);
+                setTimeout(handleDisconnect, 2000);
+            }
+        });
+
+        connection.on('error', function(err){
+            console.log('db error', err);
+            if (err.code === 'PROTOCOL_CONNECTION_LOST'){
+                handleDisconnect();
+            } else {
+                throw err;
+            }
+        });
+    }
+    handleDisconnect();
+
     mysqlUtilities.upgrade(connection);
     mysqlUtilities.introspection(connection);
 
@@ -457,38 +474,25 @@ app.get('/api/updateOwnersList', parser, function(req, response){
 });
 
 app.get('/api/getList', parser, function(req,response) {
-    var status = req.query.status;
-    if (status == "guest") {
-        connection.query("SELECT users.name, users.surname, users.gender, dorms.dorm_name, invitations.dish, invitations.dish_about, invitations.meet_time, meets.status " +
-            "FROM users, invitations, meets, dorms " +
-            "WHERE users.user_id = invitations.owner_id AND meets.invite_id = invitations.invite_id AND dorms.dorm_id = users.dorm_id " +
-            "ORDER BY invitations.meet_time " +
-            "LIMIT 0, 10 ", function (err, result) {
-            response.json(result);
-        });
-    }
+    status = req.query.status;
+    var a = new GetList(status);
+    console.log('\n');
+    console.log(a);
+    response.json(a);
 });
 
 function GetList(status) {
     console.log("status = " + status);
-    var list;
-    if (status == "owner") {
-        connection.query("select * from users where status = 'guest'", function (err, res) {
-            return res;
+    var ctime = moment().unix();
+    if (status == "guest") {
+        connection.query("SELECT invitations.invite_id, users.name, users.surname, users.gender, dorms.dorm_name, invitations.dish, invitations.dish_about, invitations.meet_time, meets.status " +
+            "FROM users, invitations, meets, dorms " +
+            "WHERE users.user_id = invitations.owner_id AND meets.invite_id = invitations.invite_id AND dorms.dorm_id = users.dorm_id AND invitations.meet_time < "  + ctime + " " +
+            "ORDER BY invitations.meet_time " + // todo: сортировать по времени в порядке возрастания
+            "LIMIT 0, 20 ", function (err, result) {
+            console.log('\n');
+            console.log(result);
+            return result;
         });
-
-    } else if (status == "guest") {
-        connection.query("SELECT users.name, users.surname, users.gender, invitations.dish, invitations.dish_about, invitations.meet_time, meets.status " +
-            "FROM users, invitations, meets " +
-            "WHERE users.user_id = invitations.owner_id AND meets.invite_id = invitations.invite_id " +
-            "LIMIT 0, 10 ", function (err,result) {
-            list = result;
-        });
-
-    } else {
-
     }
-
-    console.log("list = " + list);
-    return list;
 }

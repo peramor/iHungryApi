@@ -16,3 +16,321 @@ Database is connected
 /db/get?table=invitations started..
 - > TABLE invitations
 
+Express server is listening on port 1337
+Database is connected
+Express server is listening on port 1337
+Database is connected
+
+/db/get?table=users started..
+- > TABLE users
+
+
+Error: Connection lost: The server closed the connection.
+    at Protocol.end (/var/www/hungry/data/ihungryapi/node_modules/mysql/lib/protocol/Protocol.js:103:13)
+    at Socket.<anonymous> (/var/www/hungry/data/ihungryapi/node_modules/mysql/lib/Connection.js:88:28)
+    at Socket.EventEmitter.emit (events.js:117:20)
+    at _stream_readable.js:910:16
+    at process._tickCallback (node.js:415:13)
+Express server is listening on port 1337
+Database is connected
+
+/db/get?table=users started..
+- > TABLE users
+
+
+/db/get?table=tokens started..
+- > TABLE tokens
+
+
+/db/get?table=tokens started..
+- > TABLE tokens
+
+
+Error: Connection lost: The server closed the connection.
+    at Protocol.end (/var/www/hungry/data/ihungryapi/node_modules/mysql/lib/protocol/Protocol.js:103:13)
+    at Socket.<anonymous> (/var/www/hungry/data/ihungryapi/node_modules/mysql/lib/Connection.js:88:28)
+    at Socket.EventEmitter.emit (events.js:117:20)
+    at _stream_readable.js:910:16
+    at process._tickCallback (node.js:415:13)
+Express server is listening on port 1337
+
+/api/login started..
+{ mail: 'rmaltsev@edu.hse.ru', pass: 'Роман', appID: '1' }
+Hash.js    | hash started..
+[ { email: 'rmaltsev@edu.hse.ru' } ]
+rmaltsev@edu.hse.ru
+jwtauth.js    | GetToken started..
+jwtauth.js    | Access Token Expires : 1464632582
+jwtauth.js    | Access Token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc1LCJleHAiOjE0NjQ2MzI1ODJ9.HkCttArx_x0kIsyBaa8kfq7pUmrm1U6mTRfj-Bamwck
+jwtauth.js    | GetRefreshToken started..
+jwtauth.js    | Refresh Token : lHbYwNO3BaSM75s6xZWYPSqIbm9yzsn4
+jwtauth.js    | Refresh Token Expires : 1496164982
+Hash.js    | hash started..
+update tokens set user_id = ?, refresh_token = ?, expires = ? where app_id = ?
+
+/api/login started..
+{ mail: 'rmatiev@edu.hse.ru', pass: 'Рустем', appID: '2' }
+Hash.js    | hash started..
+[ { email: 'rmatiev@edu.hse.ru' } ]
+rmatiev@edu.hse.ru
+jwtauth.js    | GetToken started..
+jwtauth.js    | Access Token Expires : 1464632813
+jwtauth.js    | Access Token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc2LCJleHAiOjE0NjQ2MzI4MTN9.NiHk2mdR15jxTKLn43RoH6FzXNdk7-voVF11ykZBpuw
+jwtauth.js    | GetRefreshToken started..
+jwtauth.js    | Refresh Token : CgfcIa42pOjNsq3pYgACv8bLiokBfKqx
+jwtauth.js    | Refresh Token Expires : 1496165213
+Hash.js    | hash started..
+update tokens set user_id = ?, refresh_token = ?, expires = ? where app_id = ?
+
+/api/login started..
+{ mail: 'nlopatov@edu.hse.ru', pass: 'Никита', appID: '3' }
+Hash.js    | hash started..
+[ { email: 'nlopatov@edu.hse.ru' } ]
+nlopatov@edu.hse.ru
+jwtauth.js    | GetToken started..
+jwtauth.js    | Access Token Expires : 1464633418
+jwtauth.js    | Access Token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc3LCJleHAiOjE0NjQ2MzM0MTh9.7ovzaaoOP6APzqlKCN9hwfklr-yh3BT_jZNwS9KvdaE
+jwtauth.js    | GetRefreshToken started..
+jwtauth.js    | Refresh Token : SkwkY9TD5gIprSgS3nckZLWaOj1l4QHj
+jwtauth.js    | Refresh Token Expires : 1496165818
+Hash.js    | hash started..
+update tokens set user_id = ?, refresh_token = ?, expires = ? where app_id = ?
+
+/api/login started..
+{ mail: 'aloshkarev@edu.hse.ru', pass: 'Анто', appID: '4' }
+Hash.js    | hash started..
+[ { email: 'aloshkarev@edu.hse.ru' } ]
+aloshkarev@edu.hse.ru
+Неверный пароль
+
+/api/login started..
+{ mail: 'aloshkarev@edu.he.ru', pass: 'Анто', appID: '4' }
+Hash.js    | hash started..
+[]
+
+/api/login started..
+{ mail: 'aloshkarev@edu.hse.ru', pass: 'Антон', appID: '4' }
+Hash.js    | hash started..
+[ { email: 'aloshkarev@edu.hse.ru' } ]
+aloshkarev@edu.hse.ru
+jwtauth.js    | GetToken started..
+jwtauth.js    | Access Token Expires : 1464633605
+jwtauth.js    | Access Token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc4LCJleHAiOjE0NjQ2MzM2MDV9.HnPHKrozkAAdaLmFRMPWEMB6ehdsYTDEmYXgEia48ns
+jwtauth.js    | GetRefreshToken started..
+jwtauth.js    | Refresh Token : 0y5MefmN9mJ4z3rxM7ZW8MkjlLsUSXLX
+jwtauth.js    | Refresh Token Expires : 1496166005
+Hash.js    | hash started..
+update tokens set user_id = ?, refresh_token = ?, expires = ? where app_id = ?
+
+/api/sendmail started..
+mail : kursake@edu.hse.ru
+не найден в базе данных
+Code: 3165
+Error transporter Error: Invalid login: 534-5.7.14 <https://accounts.google.com/signin/continue?sarp=1&scc=1&plt=AKgnsbt3
+534-5.7.14 skECkxbQIpcv815R2F36LLp6_3todO_a9OtcDOnoA53iFSaEWfb1sr5p6RSOIaVTt93mZg
+534-5.7.14 y2f2ypy05kqm3VxRdogG6-s_wABBT25fFnHvhFtUWhPFSpGOBFPHBmGqVr74yuIfAyunxa
+534-5.7.14 -gEqlsEl0EjNJLVCS5kJQhYc3pDp-TmV3-7V2XxCUokbKbM0O6GLvkUSv13-qliB6oVFI0
+534-5.7.14 qFbxZdUNIzYCbLMTr90q4oCkvfHag> Please log in via your web browser and
+534-5.7.14 then try again.
+534-5.7.14  Learn more at
+534 5.7.14  https://support.google.com/mail/answer/78754 e1sm35626331wjv.9 - gsmtp
+
+/api/sendmail started..
+mail : kursake@edu.hse.ru
+не найден в базе данных
+Code: 5325
+Error transporter Error: Invalid login: 534-5.7.14 <https://accounts.google.com/signin/continue?sarp=1&scc=1&plt=AKgnsbtC
+534-5.7.14 LbAjZYZgQVoznUo8I4wVJIXgBSLjzpS6ADPGI4GrrzoZ0obWqNZPY6GlXWYLlor5zaK8Kb
+534-5.7.14 0knrZnaoJpZhc-iAIHG_RqPqkcBDhk8JRGuq9_YE0G6XPX7S5lkJRKMgpca7eqctZ2XgAb
+534-5.7.14 cBSLyJID-M-p7J6mfYxs42UwrxazylH7nNBmECMQy-fRonHR4gHg0KyYibzM7txfoGKDkJ
+534-5.7.14 4FydvNGt-m7_AYNOPsixDWk1ONA6Y> Please log in via your web browser and
+534-5.7.14 then try again.
+534-5.7.14  Learn more at
+534 5.7.14  https://support.google.com/mail/answer/78754 m3sm35678569wjc.27 - gsmtp
+
+/api/checkCode?code=1234 started..
+mail = undefined
+code = 1234
+Совпадения не найдены
+
+_/api/makeInvite started...
+jwtauth.js    | Проверка маркера доступа : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc5LCJleHAiOjE0NjM5MjgzNTN9.0FcoxdCMnQm3LzZLYTUkx3FTUGeq53Ducj0bv4sdxoU
+jwtauth.js    | ERROR не удалось декодировать маркер доступа : Error: Token expired
+INVALID TOKEN
+
+_/api/updateToken started..
+appID = 97446AF6-FDFD-4419-91AA-0E65B655126F
+appID не зарегистрирован
+
+/api/sendMail started..
+mail : mmbabaev@gmail.com
+не найден в базе данных
+Code: 9709
+Error transporter Error: Invalid login: 534-5.7.14 <https://accounts.google.com/signin/continue?sarp=1&scc=1&plt=AKgnsbvt
+534-5.7.14 T0G36alDEemQQ1bGFsJgxgDGzyjZYfz_R33IBPmlF20qXX3PjGH6jllOvHd15R8B0xouji
+534-5.7.14 QINoTUicz1duQ9oukFwZFXP0wOTdLlZD8lN8HVcAWViX34m-p2gTi-dOOtS9NA5HPI66oa
+534-5.7.14 6sTCpNPOwvdW2OSKjiSxRMKB-ktqn2aP4cfgXrIoOg1hJa5HBbH4rppK4iGNyE_fHVRNAP
+534-5.7.14 _XBw17Bq7UKn84302YbN6AgVmVsMY> Please log in via your web browser and
+534-5.7.14 then try again.
+534-5.7.14  Learn more at
+534 5.7.14  https://support.google.com/mail/answer/78754 dj4sm14670694wjc.13 - gsmtp
+
+/db/get started..
+- > TABLE undefined does not exist
+Error: ER_NO_SUCH_TABLE: Table 'hungry.undefined' doesn't exist
+
+/db/get?table=users started..
+- > TABLE users
+
+
+/db/get?table=users started..
+- > TABLE users
+
+
+/db/get?table=users started..
+- > TABLE users
+
+
+/db/get?table=users started..
+- > TABLE users
+
+
+/api/login started..
+{ mail: 'rmaltsev@edu.hse.ru', pass: 'Роман', appID: '1' }
+Hash.js    | hash started..
+[ { email: 'rmaltsev@edu.hse.ru' } ]
+rmaltsev@edu.hse.ru
+jwtauth.js    | GetToken started..
+jwtauth.js    | Access Token Expires : 1464682446
+jwtauth.js    | Access Token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc1LCJleHAiOjE0NjQ2ODI0NDZ9.nzUK_XgFHL8OjClt3HTGISYwR1Vdb3a99AKvAucoyE8
+jwtauth.js    | GetRefreshToken started..
+jwtauth.js    | Refresh Token : Tf0ChqcDWLRIsF70HihbCfx8ylQaf2zL
+jwtauth.js    | Refresh Token Expires : 1496214846
+Hash.js    | hash started..
+update tokens set user_id = ?, refresh_token = ?, expires = ? where app_id = ?
+
+/api/login started..
+{ mail: 'rmaltsev@edu.hse.ru', pass: 'Роман', appID: '1' }
+Hash.js    | hash started..
+[ { email: 'rmaltsev@edu.hse.ru' } ]
+rmaltsev@edu.hse.ru
+jwtauth.js    | GetToken started..
+jwtauth.js    | Access Token Expires : 1464682449
+jwtauth.js    | Access Token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc1LCJleHAiOjE0NjQ2ODI0NDl9.ZCshdOlbqgfCX1ZpnT2PqWmmqfkxSH0J4NXJzB4rga0
+jwtauth.js    | GetRefreshToken started..
+jwtauth.js    | Refresh Token : kwLMhlxrHu5B9p5EypjLfYEHSzPf4yxg
+jwtauth.js    | Refresh Token Expires : 1496214849
+Hash.js    | hash started..
+update tokens set user_id = ?, refresh_token = ?, expires = ? where app_id = ?
+
+/api/login started..
+{ mail: 'rmaltsev@edu.hse.ru', pass: 'Роман', appID: '1' }
+Hash.js    | hash started..
+[ { email: 'rmaltsev@edu.hse.ru' } ]
+rmaltsev@edu.hse.ru
+jwtauth.js    | GetToken started..
+jwtauth.js    | Access Token Expires : 1464682652
+jwtauth.js    | Access Token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc1LCJleHAiOjE0NjQ2ODI2NTJ9.0Ga8cNQwtgKT13K5sG0-SCqylXFjtrFXTm_7MXX01jo
+jwtauth.js    | GetRefreshToken started..
+jwtauth.js    | Refresh Token : iGhoUcBZc4RCt9AZlOq0Wpps0bi9nPqb
+jwtauth.js    | Refresh Token Expires : 1496215052
+Hash.js    | hash started..
+update tokens set user_id = ?, refresh_token = ?, expires = ? where app_id = ?
+
+/api/login started..
+{ mail: 'rmaltsev@edu.hse.ru', pass: 'Роман', appID: '1' }
+Hash.js    | hash started..
+[ { email: 'rmaltsev@edu.hse.ru' } ]
+rmaltsev@edu.hse.ru
+jwtauth.js    | GetToken started..
+jwtauth.js    | Access Token Expires : 1464687791
+jwtauth.js    | Access Token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc1LCJleHAiOjE0NjQ2ODc3OTF9.BaPYdPwVjvtSeXO3uXg3s7IU7OCyO4HT9iiEs3yABFk
+jwtauth.js    | GetRefreshToken started..
+jwtauth.js    | Refresh Token : uVUuDUG7PTrPWfhgivZxCC6OH9DkDQYk
+jwtauth.js    | Refresh Token Expires : 1496220191
+Hash.js    | hash started..
+update tokens set user_id = ?, refresh_token = ?, expires = ? where app_id = ?
+
+/api/login started..
+{ mail: 'rmaltsev@edu.hse.ru', pass: 'Роман', appID: '1' }
+Hash.js    | hash started..
+[ { email: 'rmaltsev@edu.hse.ru' } ]
+rmaltsev@edu.hse.ru
+jwtauth.js    | GetToken started..
+jwtauth.js    | Access Token Expires : 1464687813
+jwtauth.js    | Access Token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc1LCJleHAiOjE0NjQ2ODc4MTN9.paVZNuYUfBJ1ALyzlayqQkGL2t0qRB59z5_RWZz3A5U
+jwtauth.js    | GetRefreshToken started..
+jwtauth.js    | Refresh Token : q9Ou4Qyz7Rx43LhrnPSkkJkXuPJCq7FK
+jwtauth.js    | Refresh Token Expires : 1496220213
+Hash.js    | hash started..
+update tokens set user_id = ?, refresh_token = ?, expires = ? where app_id = ?
+
+/api/login started..
+{ appID: '80A39A7A-7D1A-42B2-8895-0A8DB5FA73F3',
+  mail: 'mmbabaev@gmail.com',
+  pass: '1234' }
+Hash.js    | hash started..
+[]
+
+/api/login started..
+{ appID: '80A39A7A-7D1A-42B2-8895-0A8DB5FA73F3',
+  mail: 'rmaltsev@edu.hse.ru',
+  pass: 'Роман' }
+Hash.js    | hash started..
+[ { email: 'rmaltsev@edu.hse.ru' } ]
+rmaltsev@edu.hse.ru
+jwtauth.js    | GetToken started..
+jwtauth.js    | Access Token Expires : 1464688180
+jwtauth.js    | Access Token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc1LCJleHAiOjE0NjQ2ODgxODB9.otp-HjojNdq33k-EyPeE6I96EW_P4jyfRJYnwzm6W4c
+jwtauth.js    | GetRefreshToken started..
+jwtauth.js    | Refresh Token : CiNSiVU2zAehHTAYG53QxjFCOWUrfO4N
+jwtauth.js    | Refresh Token Expires : 1496220580
+Hash.js    | hash started..
+insert into tokens (user_id, refresh_token, expires, app_id) values (?, ?, ? ,?)
+
+_/api/makeInvite started...
+jwtauth.js    | Проверка маркера доступа : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc1LCJleHAiOjE0NjQ2ODgxODB9.otp-HjojNdq33k-EyPeE6I96EW_P4jyfRJYnwzm6W4c
+jwtauth.js    | exp = 1464688180
+jwtauth.js    | now = 1464684638
+jwtauth.js    | проверка пройдена : true
+id = 75
+запись добавлена в таблицу invitations
+статус пользователя изменен на "owner"
+
+/api/login started..
+{ mail: 'rmaltsev@edu.hse.ru', pass: 'Роман', appID: '1' }
+Hash.js    | hash started..
+[ { email: 'rmaltsev@edu.hse.ru' } ]
+rmaltsev@edu.hse.ru
+jwtauth.js    | GetToken started..
+jwtauth.js    | Access Token Expires : 1464711688
+jwtauth.js    | Access Token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjc1LCJleHAiOjE0NjQ3MTE2ODh9.8qUGx9Hy3jRYx15hvbZCIbOENS869GDsIautZjuLMyE
+jwtauth.js    | GetRefreshToken started..
+jwtauth.js    | Refresh Token : YpW7CrnH2DJVmVmhZPWdJszoKB8gB7rI
+jwtauth.js    | Refresh Token Expires : 1496244088
+Hash.js    | hash started..
+update tokens set user_id = ?, refresh_token = ?, expires = ? where app_id = ?
+
+/db/get started..
+- > TABLE undefined does not exist
+Error: ER_NO_SUCH_TABLE: Table 'hungry.undefined' doesn't exist
+db error { [Error: Connection lost: The server closed the connection.] fatal: true, code: 'PROTOCOL_CONNECTION_LOST' }
+
+/db/get?table=users started..
+- > TABLE users
+
+db error { [Error: Connection lost: The server closed the connection.] fatal: true, code: 'PROTOCOL_CONNECTION_LOST' }
+db error { [Error: Connection lost: The server closed the connection.] fatal: true, code: 'PROTOCOL_CONNECTION_LOST' }
+db error { [Error: Connection lost: The server closed the connection.] fatal: true, code: 'PROTOCOL_CONNECTION_LOST' }
+
+/api/login started..
+{ mail: 'test@mail.ru', password: '1' }
+Hash.js    | hash started..
+Hash.js    | Ошибка при хэшировании TypeError: Not a string or buffer
+[]
+
+/api/login started..
+{ mail: 'test@mail.ru', password: '1' }
+Hash.js    | hash started..
+Hash.js    | Ошибка при хэшировании TypeError: Not a string or buffer
+[]
