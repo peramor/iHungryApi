@@ -102,13 +102,13 @@ app.put('/api/sendMail', parser, function (req, res) {
         }
 
         var transporter = nodemailer.createTransport({
-            service: 'Gmail',
+            service: 'Zoho', //Gmail не работает на удаленном сервере
             auth: {
-                user: 'i.hungry.info@gmail.com',
+                user: 'ihungry.info@zoho.com',
                 pass: 'asdfasdf11'
             }
         }, {
-            from: 'iHungry Support <i.hungry.info@gmail.com>'
+            from: 'iHungry Support <ihungry.info@zoho.com>'
         });
 
         var code = Math.floor(Math.random() * 8999) + 1000;
