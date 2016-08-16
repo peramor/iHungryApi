@@ -176,6 +176,7 @@ app.put('/api/registration', parser, function (req, response) {
     var email, surname, name, gender, phone, vk, dorm_id, flat, fac, pass, request, params, appID, userID, token, rt;
 
     console.log('\n' + req.url + " started..");
+    console.log(req.body);
 
     appID   = req.body.appID;
     email   = req.body.mail;
