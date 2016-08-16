@@ -154,18 +154,30 @@ app.get('/api/checkCode', parser, function (req, res) {
 
     request = "select * from users where email='" + mail + "' and code=" + code;
     connection.query(request, function (err, result) {
+        var error = {status: "error", text: "Ошибка на сервере. Попробуйте позже"};
         if (err) {
-            console.log("Database error: " + err);
-            res.json({status: "error", text: "Ошибка на сервере, попробуйте позже"}); // todo: фиксировать такие ошибки
+            console.log(err);
+            res.json(error);
+            // todo: фиксировать такие ошибки
         }
         if (result.length == 0) {
-            console.log('Совпадения не найдены')
-            response = {status: "error", text: "Неправильный код!"};
-            res.json(response);
+            var text = "Неправильный код";
+            console.log(text);
+            error.text = text;
+            res.json(error);
         }
         else {
-            console.log(result);
-            res.json({status: "success"});
+            // Отправляем список общежитий для формы регистрации
+            connection.query("Select dorm_id, dorm_name from dorms", function(dormsErr, dormsRes){
+                if (dormsErr){
+                    console.log(dormsErr);
+                    res.json(error);
+                    return;
+                }
+                console.log("Правильный код");
+                console.log(dormsRes);
+                res.json({status: "success", data: dormsRes});
+            });
         }
     });
 });
