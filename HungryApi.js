@@ -171,22 +171,23 @@ app.get('/api/checkCode', parser, function (req, res) {
 });
 
 app.put('/api/registration', parser, function (req, response) {
-// params : appID, mail, surname, name, gender, phone, vk, dorm_id, flat, fac_id, pass
+// params : appID, mail, surname, name, gender, phone, vk, dorm_id, flat, fac, pass
 // response = {status : "null", text : "null", accessToken : "null", refreshToken : "null"}
-    var email, surname, name, gender, phone, vk, dorm_id, flat, fac_id, pass, request, params, appID, userID, token, rt;
+    var email, surname, name, gender, phone, vk, dorm_id, flat, fac, pass, request, params, appID, userID, token, rt;
 
     console.log('\n' + req.url + " started..");
-    appID = req.body.appID;
-    email = req.body.mail;
+
+    appID   = req.body.appID;
+    email   = req.body.mail;
     surname = req.body.surname;
-    name = req.body.name;
-    gender = req.body.gender;
-    phone = req.body.phone;
-    vk = req.body.vk;
+    name    = req.body.name;
+    gender  = req.body.gender;
+    phone   = req.body.phone;
+    vk      = req.body.vk;
     dorm_id = req.body.dorm_id;
-    flat = req.body.flat;
-    fac_id = req.body.fac_id;
-    pass = req.body.pass;
+    flat    = req.body.flat;
+    fac     = req.body.fac; // UPD(15/08/16): fac_id -> fac
+    pass    = req.body.pass;
 
     console.log('mail : ' + email);
 
@@ -199,7 +200,7 @@ app.put('/api/registration', parser, function (req, response) {
     connection.query(request, params, function (err, result) {
         if (result.length == 0) { // Если в users не найден email
             console.log("mail не зарегистрирован в системе");
-            response.json({status: "error", text: "варификацмя email не была пройдена"});
+            response.json({status: "error", text: "email не был подтвержден"});
         } else { // Если найден email
             userID = result[0]['user_id'];
             token = jwt.GetToken(tokenLive, 'h');
@@ -214,10 +215,10 @@ app.put('/api/registration', parser, function (req, response) {
                     console.log('токен добавлен в бд');
 
                     request = "UPDATE users set surname=?, name=?, gender=?," +
-                        "phone=?, vk=?, dorm_id=?, flat=?, fac_id=?, pass=?, code=0 where email=? AND pass IS NULL ";
-                    params = [surname, name, gender, phone, vk, dorm_id, flat, fac_id, pass, email];
+                        "phone=?, vk=?, dorm_id=?, flat=?, fac=?, pass=?, code=0 where email=? AND pass IS NULL ";
+                    params = [surname, name, gender, phone, vk, dorm_id, flat, fac, pass, email];
                     connection.query(request, params, function (err, result) {
-                        if (!err) { // Если удается выполнить запрос
+                        if (!err) {
                             if (result.affectedRows == 0) { // Если ни одна запись не изменена where email=? AND pass IS NULL
                                 error.text = "Пользователь с таким email зарегистрирован";
                                 response.json(error);
