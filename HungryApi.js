@@ -244,7 +244,7 @@ app.put('/api/registration', parser, function (req, response) {
         }
     });
 
-    function deleteToken(var hrt){
+    function deleteToken(hrt){
         connection.query("DELETE from tokens where refresh_token = ?", [hrt], function (err, result) {
             console.log('токен удален');
         });
