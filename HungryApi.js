@@ -223,10 +223,7 @@ app.put('/api/registration', parser, function (req, response) {
                             if (result.affectedRows == 0) { // Если ни одна запись не изменена where email=? AND pass IS NULL
                                 error.text = "Пользователь с таким email зарегистрирован";
                                 response.json(error);
-                                connection.query("DELETE from tokens where refresh_token = ?", [hrt], function (err){
-                                    if (err) throw err;
-                                    console.log('токен удален');
-                                });
+                                deleteToken(hrt);
                             } else { // если одна запись измененена - пользователь зарегистрирован
                                 console.log("Пользователь зарегистрирован");
                                 response.json({status: "success", accessToken: token, refreshToken: rt[1]});
@@ -234,18 +231,24 @@ app.put('/api/registration', parser, function (req, response) {
                         } else { // Если не удается добавить пользователя
                             console.log("DBerror : " + err);
                             response.json(error);
-                            connection.query("DELETE from tokens where refresh_token = ?", [hrt], function (err, result) {
-                                console.log('токен удален');
-                            });
+                            deleteToken(hrt);
                         }
                     });
                 } else { // Если не удаётся выполнить запрос (null или значение appID не уникально)
                     console.log(err);
-                    response.json(error)
+                    error.Text = "не удается создать уникальный токен: токен для данного устройства уже был создан";
+                    response.json(error);
+                    deleteToken(hrt);
                 }
             });
         }
     });
+
+    function deleteToken(var hrt){
+        connection.query("DELETE from tokens where refresh_token = ?", [hrt], function (err, result) {
+            console.log('токен удален');
+        });
+    }
 });
 
 app.get('/api/login', parser, function (req, response) {
