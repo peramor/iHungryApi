@@ -130,7 +130,6 @@ app.put('/api/sendMail', parser, function (req, res) {
             console.log('Message sent: ' + info.response);
 
             connection.query(request, [code, mail], function (errorDB, result) {
-                console.log('code : ' + code);
                 if (!errorDB) {
                     console.log('код был отправлен');
                     res.json({status: "success", text: 'код подтверждения был отправлен на адрес : ' + mail});
@@ -296,8 +295,15 @@ app.get('/api/login', parser, function (req, response) {
                         connection.query('select * from tokens where app_id = ?', [appID], function (err, result) {
                             if (result.length == 0) {
                                 request = 'insert into tokens (user_id, refresh_token, expires, app_id) values (?, ?, ? ,?)';
-                            } else {
+                            } else if (result[0]["user_id"] == userID){
                                 request = 'update tokens set user_id = ?, refresh_token = ?, expires = ? where app_id = ?'
+                            } else { // UPD(20/08/16): нужно еще подумать над этим
+                                console.log("APPID_EX: попытка перезаписать appID на другого пользователя");
+                                response.json({
+                                    status: "error",
+                                    text: "На одном устройстве можно регистрировать только один аккаунт: это устройство уже занято"
+                                });
+                                return;
                             }
 
                             connection.query(request,
