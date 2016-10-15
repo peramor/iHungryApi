@@ -372,9 +372,9 @@ app.post('/api/makeInvite', parser, function (req, res) {
                         if (!err) {
                             console.log('статус пользователя изменен на "owner"');
 
-                            connection.query("SELECT users.name, users.surname, users.gender, dorms.dorm_name, meets.status " +
-                                "FROM users, meets, dorms " +
-                                "WHERE users.dorm_id = dorms.dorm_id AND users.user_id = meets.guest_id", function(err, result) {
+                            connection.query("SELECT users.name, users.surname, users.gender, dorms.dorm_name " +
+                                "FROM users, dorms " +
+                                "WHERE users.dorm_id = dorms.dorm_id", function(err, result) {
                                 if (err)
                                     console.log("DBERROR: " + err);
                                 else {
