@@ -372,7 +372,7 @@ app.post('/api/makeInvite', parser, function (req, res) {
                         if (!err) {
                             console.log('статус пользователя изменен на "owner"');
 
-                            connection.query("SELECT users.name, users.surname, users.gender, dorms.dorm_name, meets.statis " +
+                            connection.query("SELECT users.name, users.surname, users.gender, dorms.dorm_name, meets.status " +
                                 "FROM users, meets and dorms " +
                                 "WHERE users.dorm_id = dorms.dorm_id AND users.user_id = meets.guest_id", function(err, result) {
                                 if (err)
