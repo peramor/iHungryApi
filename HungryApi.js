@@ -338,6 +338,7 @@ app.get('/api/login', parser, function (req, response) {
 app.post('/api/makeInvite', parser, function (req, res) {
 // params = token, dishAbout, meetTime, dish
 // response = {status : "null", text : "null", accessToken : "null"}
+    // response = {status, guests : {name, surname, gender, dorm_name}}
     console.log('\n_' + req.url + ' started...');
 
     token = req.body.token;
@@ -370,7 +371,16 @@ app.post('/api/makeInvite', parser, function (req, res) {
                     connection.query('update users set status = ? where user_id = ?', ["owner", token.iss], function (err, result) {
                         if (!err) {
                             console.log('статус пользователя изменен на "owner"');
-                            res.json({status: "success"});
+
+                            connection.query("SELECT users.name, users.surname, users.gender, dorms.dorm_name" +
+                                "FROM users and dorms" +
+                                "WHERE users.dorm_id = dorms.dorm_id", function(err, result) {
+                                if (err)
+                                    console.log("DBERROR: " + err);
+                                else {
+                                    res.json({status: "success", guests: result});
+                                }
+                            });
                         } else {
                             console.log('ERROR : не удалось обновить статус пользователя -> ' + err);
                             res.json(error);
